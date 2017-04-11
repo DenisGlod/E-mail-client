@@ -1,6 +1,6 @@
 ﻿namespace E_mail_client
 {
-    partial class FormLogin
+    partial class StartForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.

@@ -48,11 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mail.cs">
+    <Compile Include="EMailClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mail.Designer.cs">
-      <DependentUpon>Mail.cs</DependentUpon>
+    <Compile Include="EMailClient.Designer.cs">
+      <DependentUpon>EMailClient.cs</DependentUpon>
     </Compile>
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
@@ -62,8 +62,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Mail.resx">
-      <DependentUpon>Mail.cs</DependentUpon>
+    <EmbeddedResource Include="EMailClient.resx">
+      <DependentUpon>EMailClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>

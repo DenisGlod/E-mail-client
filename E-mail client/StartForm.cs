@@ -1,19 +1,18 @@
-﻿using System;
-using System.Windows.Forms;
-using ImapX;
+﻿using ImapX;
+using System;
 using System.Security.Authentication;
-using ImapX.Authentication;
+using System.Windows.Forms;
 
 namespace E_mail_client
 {
-    public partial class FormLogin : Form
+    public partial class StartForm : Form
     {
         private const string gmailHost = "imap.gmail.com";
         private const string mailHost = "imap.mail.ru";
         private const string yandexHost = "imap.yandex.ru";
         private const int portImap = 993;
 
-        public FormLogin()
+        public StartForm()
         {
             InitializeComponent();
             comboBoxHost.SelectedIndex = 0;
@@ -55,10 +54,13 @@ namespace E_mail_client
 
             if (client.Connect())
             {
-                var credentials = new OAuth2Credentials("login", "token");
                 if (email.Length > 0 && password.Length > 0 && client.Login(email, password))
                 {
-                    MessageBox.Show("Авторизация успешна.", "Авторизация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult messageBox = MessageBox.Show("Авторизация успешна.", "Авторизация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (messageBox == DialogResult.OK)
+                    {
+                        new EMailClient(client).Visible = true;
+                    }
                 }
                 else
                 {
