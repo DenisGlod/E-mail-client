@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace E_mail_client
 {
-    public partial class Form1 : Form
+    public partial class Mail : Form
     {
-        public Form1()
+        public Mail()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
