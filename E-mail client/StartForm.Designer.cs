@@ -54,6 +54,7 @@
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(205, 20);
             this.textBoxEmail.TabIndex = 2;
+            this.textBoxEmail.Text = "glod.denis.konstantinovich@yandex.ru";
             // 
             // textBoxPassword
             // 
@@ -61,6 +62,7 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(205, 20);
             this.textBoxPassword.TabIndex = 3;
+            this.textBoxPassword.Text = "T4Puk8#9vrlF&%8)";
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // labelEmail
@@ -114,7 +116,7 @@
             this.checkBoxShowPassword.UseVisualStyleBackColor = true;
             this.checkBoxShowPassword.CheckedChanged += new System.EventHandler(this.CheckBoxShowPassword_CheckedChanged);
             // 
-            // FormLogin
+            // StartForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(308, 144);
@@ -128,7 +130,7 @@
             this.Controls.Add(this.buttonLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FormLogin";
+            this.Name = "StartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-mail client";
             this.ResumeLayout(false);

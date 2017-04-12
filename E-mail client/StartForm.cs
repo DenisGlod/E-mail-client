@@ -48,10 +48,10 @@ namespace E_mail_client
                 textBoxPassword.UseSystemPasswordChar = true;
             }
         }
+
         private void Conect(string host, string email, string password)
         {
             ImapClient client = new ImapClient(host, portImap, SslProtocols.Ssl3, false);
-
             if (client.Connect())
             {
                 if (email.Length > 0 && password.Length > 0 && client.Login(email, password))
@@ -59,7 +59,14 @@ namespace E_mail_client
                     DialogResult messageBox = MessageBox.Show("Авторизация успешна.", "Авторизация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (messageBox == DialogResult.OK)
                     {
-                        new EMailClient(client).Visible = true;
+                        new EMailClient(client, email).Visible = true;
+                        this.Visible = false;
+                        Clear();
+                    }
+                    else
+                    {
+                        Clear();
+                        client.Disconnect();
                     }
                 }
                 else
@@ -71,6 +78,13 @@ namespace E_mail_client
             {
                 MessageBox.Show("Ошибка! Не удалось подключиться к серверу.", "Авторизация", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Clear()
+        {
+            textBoxEmail.Clear();
+            textBoxPassword.Clear();
+            textBoxPassword.UseSystemPasswordChar = true;
         }
     }
 }
