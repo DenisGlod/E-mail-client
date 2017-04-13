@@ -34,6 +34,7 @@
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Спам");
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Корзина");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("-------------------------------");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMailClient));
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
             this.panelButton = new System.Windows.Forms.Panel();
@@ -243,6 +244,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panelButton);
             this.Controls.Add(this.tableLayoutPanelNameEmail);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EMailClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-mail client";
