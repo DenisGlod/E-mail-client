@@ -24,6 +24,7 @@ namespace E_mail_client
                     folder != client.Folders.Trash)
                 {
                     TreeNode parentNode = treeViewFolder.Nodes.Add(folder.Name);
+                    
                     if (folder.HasChildren)
                     {
                         AddTreeViewFolder(folder.SubFolders, parentNode);
