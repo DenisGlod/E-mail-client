@@ -99,6 +99,15 @@
     <None Include="Resources\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\paper_plane.png" />
+    <None Include="Resources\mails.png" />
+    <None Include="Resources\junk.png" />
+    <None Include="Resources\inbox.png" />
+    <None Include="Resources\important.png" />
+    <None Include="Resources\flag.png" />
+    <None Include="Resources\empty_trash.png" />
+    <None Include="Resources\archive.png" />
     <Content Include="Resources\email.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

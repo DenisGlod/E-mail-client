@@ -181,7 +181,7 @@
             // 
             // timer
             // 
-            this.timer.Interval = 5000;
+            this.timer.Interval = 4000;
             this.timer.Tick += new System.EventHandler(this.HideErrorMessage);
             // 
             // StartForm
