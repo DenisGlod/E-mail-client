@@ -7,8 +7,14 @@ namespace E_mail_client
 {
     public partial class StartForm : Form
     {
+        private const string emailNullOrEmpty = "Email не может быть пустым!";
+        private const string passwordNullOrEmpty = "Пароль не может быть пустым!";
+        private const string errorEmailOrPassword = "Неверный логин или пароль!";
+        private const string exceptionConnect = "Неудалось подключиться к серверу!";
+        private const string success = "Авторизация успешна.";
+
         private const string gmailHost = "imap.gmail.com";
-        private const string mailHost = "imap.mail.ru";
+        private const string outlookHost = "imap-mail.outlook.com";
         private const string yandexHost = "imap.yandex.ru";
         private const int portImap = 993;
         private string email;
@@ -23,17 +29,84 @@ namespace E_mail_client
             int host = comboBoxHost.SelectedIndex;
             email = textBoxEmail.Text;
             string password = textBoxPassword.Text;
-            switch (host)
+            if (string.IsNullOrEmpty(email))
             {
-                case 0:
-                    Conect(gmailHost, email, password);
-                    break;
-                case 1:
-                    Conect(mailHost, email, password);
-                    break;
-                case 2:
-                    Conect(yandexHost, email, password);
-                    break;
+                Message(emailNullOrEmpty, true);
+            }
+            else if (string.IsNullOrEmpty(password))
+            {
+                Message(passwordNullOrEmpty, true);
+            }
+            else
+            {
+                switch (host)
+                {
+                    case 0:
+                        Conect(gmailHost, email, password);
+                        break;
+                    case 1:
+                        Conect(outlookHost, email, password);
+                        break;
+                    case 2:
+                        Conect(yandexHost, email, password);
+                        break;
+                }
+            }
+        }
+        private void Conect(string host, string email, string password)
+        {
+            client = new ImapClient(host, portImap, SslProtocols.Tls, true);
+            if (client.Connect())
+            {
+                if (client.Login(email, password))
+                {
+                    Message(success, false);
+                }
+                else
+                {
+                    Message(errorEmailOrPassword, true);
+                }
+            }
+            else
+            {
+                Message(exceptionConnect, true);
+            }
+        }
+        private void OpenFormEmailClient(object sender, EventArgs e)
+        {
+            timer.Enabled = false;
+            new EMailClient(client, email).Visible = true;
+            Visible = false;
+            Clear();
+
+        }
+        private void HideErrorMessage(object Sender, EventArgs e)
+        {
+            labelErrorMessage.Visible = false;
+            timer.Enabled = false;
+        }
+        private void Message(string message, bool status)
+        {
+            if (status)
+            {
+                labelErrorMessage.Text = message;
+                labelErrorMessage.BackColor = System.Drawing.Color.LightSalmon;
+                labelErrorMessage.Visible = true;
+                timer.Enabled = true;
+            }
+            else
+            {
+                labelErrorMessage.Text = message;
+                labelErrorMessage.BackColor = System.Drawing.Color.LightGreen;
+                labelErrorMessage.Visible = true;
+                timer.Tick -= HideErrorMessage;
+                timer.Tick += OpenFormEmailClient;
+                timer.Enabled = true;
+                buttonLogin.Enabled = false;
+                comboBoxHost.Enabled = false;
+                textBoxEmail.Enabled = false;
+                textBoxPassword.Enabled = false;
+                checkBoxShowPassword.Enabled = false;
             }
         }
         private void CheckBoxShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -46,51 +119,6 @@ namespace E_mail_client
             {
                 textBoxPassword.UseSystemPasswordChar = true;
             }
-        }
-        private void Conect(string host, string email, string password)
-        {
-            client = new ImapClient(host, portImap, SslProtocols.Tls, true);
-            if (client.Connect())
-            {
-                if (email.Length > 0 && password.Length > 0 && client.Login(email, password))
-                {
-                    labelErrorMessage.Text = "Авторизация успешна.";
-                    labelErrorMessage.BackColor = System.Drawing.Color.LightGreen;
-                    labelErrorMessage.Visible = true;
-                    timer.Tick -= HideErrorMessage;
-                    timer.Tick += OpenFormEmailClient;
-                    timer.Enabled = true;
-                }
-                else
-                {
-                    labelErrorMessage.Text = "Ошибка! Неверный логин или пароль";
-                    labelErrorMessage.BackColor = System.Drawing.Color.LightSalmon;
-                    labelErrorMessage.Visible = true;
-                    timer.Enabled = true;
-                }
-            }
-            else
-            {
-                labelErrorMessage.Text = "Ошибка! Не удалось подключиться к серверу.";
-                labelErrorMessage.BackColor = System.Drawing.Color.LightSalmon;
-                labelErrorMessage.Visible = true;
-                timer.Enabled = true;
-            }
-        }
-
-        private void OpenFormEmailClient(object sender, EventArgs e)
-        {
-            timer.Enabled = false;
-            new EMailClient(client, email).Visible = true;
-            Visible = false;
-            Clear();
-
-        }
-
-        private void HideErrorMessage(object Sender, EventArgs e)
-        {
-            labelErrorMessage.Visible = false;
-            timer.Enabled = false;
         }
         private void Clear()
         {

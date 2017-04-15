@@ -108,7 +108,7 @@
             this.comboBoxHost.FormattingEnabled = true;
             this.comboBoxHost.Items.AddRange(new object[] {
             "Gmail",
-            "Mail",
+            "Outlook",
             "Yandex"});
             this.comboBoxHost.Location = new System.Drawing.Point(173, 123);
             this.comboBoxHost.Name = "comboBoxHost";

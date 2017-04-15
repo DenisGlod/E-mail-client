@@ -35,9 +35,8 @@
     <ApplicationIcon>Resources\email.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImapX, Version=2.0.0.16, Culture=neutral, PublicKeyToken=5992873d65130d1f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Download\Other file\ImapX 2.0.0.16 Binaries\v4.5\ImapX.dll</HintPath>
+    <Reference Include="ImapX, Version=2.0.0.18, Culture=neutral, PublicKeyToken=5992873d65130d1f, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImapX.2.0.0.18\lib\net452\ImapX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -82,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

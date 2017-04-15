@@ -11,20 +11,16 @@ namespace E_mail_client
         public EMailClient(ImapClient client, string email)
         {
             InitializeComponent();
+            panelFolders.Height = 0;
             this.client = client;
             labelNameEmail.Text = email;
             client.Behavior.FolderTreeBrowseMode = FolderTreeBrowseMode.Lazy;
             CommonFolderCollection listFolders = client.Folders;
             foreach (Folder folder in listFolders)
             {
-                if (folder != client.Folders.Inbox &&
-                    folder != client.Folders.Sent &&
-                    folder != client.Folders.Drafts &&
-                    folder != client.Folders.Junk &&
-                    folder != client.Folders.Trash)
+                if (VisibleLinkLable(folder))
                 {
                     TreeNode parentNode = treeViewFolder.Nodes.Add(folder.Name);
-                    
                     if (folder.HasChildren)
                     {
                         AddTreeViewFolder(folder.SubFolders, parentNode);
@@ -32,6 +28,64 @@ namespace E_mail_client
                 }
             }
 
+        }
+        private bool VisibleLinkLable(Folder folder)
+        {
+            if (folder == client.Folders.Inbox)
+            {
+                linkLabelInbox.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Sent)
+            {
+                linkLabelSent.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Drafts)
+            {
+                linkLabelDrafts.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Important)
+            {
+                linkLabelImportant.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Flagged)
+            {
+                linkLabelFlagged.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Junk)
+            {
+                linkLabelJunk.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Trash)
+            {
+                linkLabelTrash.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.All)
+            {
+                linkLabelAll.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            if (folder == client.Folders.Archive)
+            {
+                linkLabelArchive.Visible = true;
+                panelFolders.Height += 27;
+                return false;
+            }
+            return true;
         }
         //folder.Messages.Download();
         //IEnumerator<ImapX.Message> messageList = folder.Messages.GetEnumerator();

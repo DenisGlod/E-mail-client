@@ -33,31 +33,31 @@
             this.buttonDeleteMessage = new System.Windows.Forms.Button();
             this.buttonNewMessage = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.treeViewFolder = new System.Windows.Forms.TreeView();
+            this.panelFolders = new System.Windows.Forms.Panel();
+            this.linkLabelArchive = new System.Windows.Forms.LinkLabel();
+            this.linkLabelAll = new System.Windows.Forms.LinkLabel();
+            this.linkLabelTrash = new System.Windows.Forms.LinkLabel();
+            this.linkLabelJunk = new System.Windows.Forms.LinkLabel();
+            this.linkLabelFlagged = new System.Windows.Forms.LinkLabel();
+            this.linkLabelImportant = new System.Windows.Forms.LinkLabel();
+            this.linkLabelDrafts = new System.Windows.Forms.LinkLabel();
+            this.linkLabelSent = new System.Windows.Forms.LinkLabel();
+            this.linkLabelInbox = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
-            this.treeViewFolder = new System.Windows.Forms.TreeView();
             this.dataGridViewMessages = new System.Windows.Forms.DataGridView();
             this.DateMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Theme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
             this.panelButton.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panelFolders.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMessages)).BeginInit();
             this.tableLayoutPanelNameEmail.SuspendLayout();
             this.SuspendLayout();
@@ -67,9 +67,9 @@
             this.panelButton.Controls.Add(this.buttonDeleteMessage);
             this.panelButton.Controls.Add(this.buttonNewMessage);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButton.Location = new System.Drawing.Point(0, 598);
+            this.panelButton.Location = new System.Drawing.Point(0, 447);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(1289, 46);
+            this.panelButton.Size = new System.Drawing.Size(882, 46);
             this.panelButton.TabIndex = 1;
             // 
             // buttonDeleteMessage
@@ -93,23 +93,203 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.treeViewFolder);
-            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Controls.Add(this.panelFolders);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(0, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 558);
+            this.groupBox1.Size = new System.Drawing.Size(200, 407);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Папки";
+            // 
+            // treeViewFolder
+            // 
+            this.treeViewFolder.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.treeViewFolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.treeViewFolder.Location = new System.Drawing.Point(3, 269);
+            this.treeViewFolder.Name = "treeViewFolder";
+            this.treeViewFolder.Size = new System.Drawing.Size(194, 135);
+            this.treeViewFolder.TabIndex = 9;
+            // 
+            // panelFolders
+            // 
+            this.panelFolders.Controls.Add(this.linkLabelArchive);
+            this.panelFolders.Controls.Add(this.linkLabelAll);
+            this.panelFolders.Controls.Add(this.linkLabelTrash);
+            this.panelFolders.Controls.Add(this.linkLabelJunk);
+            this.panelFolders.Controls.Add(this.linkLabelFlagged);
+            this.panelFolders.Controls.Add(this.linkLabelImportant);
+            this.panelFolders.Controls.Add(this.linkLabelDrafts);
+            this.panelFolders.Controls.Add(this.linkLabelSent);
+            this.panelFolders.Controls.Add(this.linkLabelInbox);
+            this.panelFolders.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelFolders.Location = new System.Drawing.Point(3, 19);
+            this.panelFolders.Name = "panelFolders";
+            this.panelFolders.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.panelFolders.Size = new System.Drawing.Size(194, 250);
+            this.panelFolders.TabIndex = 8;
+            // 
+            // linkLabelArchive
+            // 
+            this.linkLabelArchive.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelArchive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelArchive.Image = global::E_mail_client.Properties.Resources.archive;
+            this.linkLabelArchive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelArchive.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelArchive.Location = new System.Drawing.Point(8, 216);
+            this.linkLabelArchive.Name = "linkLabelArchive";
+            this.linkLabelArchive.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelArchive.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelArchive.TabIndex = 8;
+            this.linkLabelArchive.TabStop = true;
+            this.linkLabelArchive.Text = "Архив";
+            this.linkLabelArchive.Visible = false;
+            // 
+            // linkLabelAll
+            // 
+            this.linkLabelAll.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelAll.Image = global::E_mail_client.Properties.Resources.mails;
+            this.linkLabelAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelAll.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelAll.Location = new System.Drawing.Point(8, 189);
+            this.linkLabelAll.Name = "linkLabelAll";
+            this.linkLabelAll.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelAll.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelAll.TabIndex = 7;
+            this.linkLabelAll.TabStop = true;
+            this.linkLabelAll.Text = "Вся почта";
+            this.linkLabelAll.Visible = false;
+            this.linkLabelAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel8_LinkClicked);
+            // 
+            // linkLabelTrash
+            // 
+            this.linkLabelTrash.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelTrash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelTrash.Image = global::E_mail_client.Properties.Resources.empty_trash;
+            this.linkLabelTrash.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelTrash.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelTrash.Location = new System.Drawing.Point(8, 162);
+            this.linkLabelTrash.Name = "linkLabelTrash";
+            this.linkLabelTrash.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelTrash.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelTrash.TabIndex = 6;
+            this.linkLabelTrash.TabStop = true;
+            this.linkLabelTrash.Text = "Корзина";
+            this.linkLabelTrash.Visible = false;
+            this.linkLabelTrash.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
+            // linkLabelJunk
+            // 
+            this.linkLabelJunk.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelJunk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelJunk.Image = global::E_mail_client.Properties.Resources.junk;
+            this.linkLabelJunk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelJunk.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelJunk.Location = new System.Drawing.Point(8, 135);
+            this.linkLabelJunk.Name = "linkLabelJunk";
+            this.linkLabelJunk.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelJunk.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelJunk.TabIndex = 5;
+            this.linkLabelJunk.TabStop = true;
+            this.linkLabelJunk.Text = "Спам";
+            this.linkLabelJunk.Visible = false;
+            this.linkLabelJunk.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
+            // 
+            // linkLabelFlagged
+            // 
+            this.linkLabelFlagged.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelFlagged.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelFlagged.Image = global::E_mail_client.Properties.Resources.flag;
+            this.linkLabelFlagged.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelFlagged.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelFlagged.Location = new System.Drawing.Point(8, 108);
+            this.linkLabelFlagged.Name = "linkLabelFlagged";
+            this.linkLabelFlagged.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelFlagged.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelFlagged.TabIndex = 4;
+            this.linkLabelFlagged.TabStop = true;
+            this.linkLabelFlagged.Text = "Помеченные";
+            this.linkLabelFlagged.Visible = false;
+            this.linkLabelFlagged.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+            // 
+            // linkLabelImportant
+            // 
+            this.linkLabelImportant.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelImportant.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelImportant.Image = global::E_mail_client.Properties.Resources.important;
+            this.linkLabelImportant.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelImportant.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelImportant.Location = new System.Drawing.Point(8, 81);
+            this.linkLabelImportant.Name = "linkLabelImportant";
+            this.linkLabelImportant.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelImportant.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelImportant.TabIndex = 3;
+            this.linkLabelImportant.TabStop = true;
+            this.linkLabelImportant.Text = "Важные";
+            this.linkLabelImportant.Visible = false;
+            this.linkLabelImportant.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            // 
+            // linkLabelDrafts
+            // 
+            this.linkLabelDrafts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelDrafts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelDrafts.Image = global::E_mail_client.Properties.Resources.pencil;
+            this.linkLabelDrafts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelDrafts.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelDrafts.Location = new System.Drawing.Point(8, 54);
+            this.linkLabelDrafts.Name = "linkLabelDrafts";
+            this.linkLabelDrafts.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelDrafts.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelDrafts.TabIndex = 2;
+            this.linkLabelDrafts.TabStop = true;
+            this.linkLabelDrafts.Text = "Черновики";
+            this.linkLabelDrafts.Visible = false;
+            this.linkLabelDrafts.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // linkLabelSent
+            // 
+            this.linkLabelSent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelSent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelSent.Image = global::E_mail_client.Properties.Resources.paper_plane;
+            this.linkLabelSent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelSent.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelSent.Location = new System.Drawing.Point(8, 27);
+            this.linkLabelSent.Name = "linkLabelSent";
+            this.linkLabelSent.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelSent.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelSent.TabIndex = 1;
+            this.linkLabelSent.TabStop = true;
+            this.linkLabelSent.Text = "Отправленные";
+            this.linkLabelSent.Visible = false;
+            this.linkLabelSent.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkLabelInbox
+            // 
+            this.linkLabelInbox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.linkLabelInbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabelInbox.Image = global::E_mail_client.Properties.Resources.inbox;
+            this.linkLabelInbox.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkLabelInbox.LinkColor = System.Drawing.SystemColors.ControlText;
+            this.linkLabelInbox.Location = new System.Drawing.Point(8, 0);
+            this.linkLabelInbox.Name = "linkLabelInbox";
+            this.linkLabelInbox.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
+            this.linkLabelInbox.Size = new System.Drawing.Size(186, 27);
+            this.linkLabelInbox.TabIndex = 0;
+            this.linkLabelInbox.TabStop = true;
+            this.linkLabelInbox.Text = "Входящие";
+            this.linkLabelInbox.Visible = false;
+            this.linkLabelInbox.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // groupBox3
             // 
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.groupBox3.Location = new System.Drawing.Point(852, 40);
+            this.groupBox3.Location = new System.Drawing.Point(619, 40);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(437, 558);
+            this.groupBox3.Size = new System.Drawing.Size(263, 407);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
@@ -118,16 +298,16 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 40);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 558);
+            this.splitter1.Size = new System.Drawing.Size(3, 407);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(849, 40);
+            this.splitter2.Location = new System.Drawing.Point(616, 40);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 558);
+            this.splitter2.Size = new System.Drawing.Size(3, 407);
             this.splitter2.TabIndex = 6;
             this.splitter2.TabStop = false;
             // 
@@ -138,165 +318,10 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(203, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(646, 558);
+            this.groupBox2.Size = new System.Drawing.Size(413, 407);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Письма";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.linkLabel9);
-            this.panel1.Controls.Add(this.linkLabel8);
-            this.panel1.Controls.Add(this.linkLabel7);
-            this.panel1.Controls.Add(this.linkLabel6);
-            this.panel1.Controls.Add(this.linkLabel5);
-            this.panel1.Controls.Add(this.linkLabel4);
-            this.panel1.Controls.Add(this.linkLabel3);
-            this.panel1.Controls.Add(this.linkLabel2);
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(194, 250);
-            this.panel1.TabIndex = 8;
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel2.Image = global::E_mail_client.Properties.Resources.paper_plane;
-            this.linkLabel2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel2.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel2.Location = new System.Drawing.Point(8, 27);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel2.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel2.TabIndex = 1;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Отправленные";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel3.Image = global::E_mail_client.Properties.Resources.pencil;
-            this.linkLabel3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel3.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel3.Location = new System.Drawing.Point(8, 54);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel3.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel3.TabIndex = 2;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Черновики";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel4.Image = global::E_mail_client.Properties.Resources.important;
-            this.linkLabel4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel4.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel4.Location = new System.Drawing.Point(8, 81);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel4.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel4.TabIndex = 3;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Важные";
-            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
-            // 
-            // linkLabel5
-            // 
-            this.linkLabel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel5.Image = global::E_mail_client.Properties.Resources.flag;
-            this.linkLabel5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel5.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel5.Location = new System.Drawing.Point(8, 108);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel5.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel5.TabIndex = 4;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "Помеченные";
-            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel6.Image = global::E_mail_client.Properties.Resources.junk;
-            this.linkLabel6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel6.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel6.Location = new System.Drawing.Point(8, 135);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel6.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel6.TabIndex = 5;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "Спам";
-            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
-            // 
-            // linkLabel7
-            // 
-            this.linkLabel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel7.Image = global::E_mail_client.Properties.Resources.empty_trash;
-            this.linkLabel7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel7.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel7.Location = new System.Drawing.Point(8, 162);
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel7.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel7.TabIndex = 6;
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "Корзина";
-            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
-            // 
-            // linkLabel8
-            // 
-            this.linkLabel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel8.Image = global::E_mail_client.Properties.Resources.mails;
-            this.linkLabel8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel8.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel8.Location = new System.Drawing.Point(8, 189);
-            this.linkLabel8.Name = "linkLabel8";
-            this.linkLabel8.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel8.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel8.TabIndex = 7;
-            this.linkLabel8.TabStop = true;
-            this.linkLabel8.Text = "Вся почта";
-            this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel8_LinkClicked);
-            // 
-            // linkLabel9
-            // 
-            this.linkLabel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel9.Image = global::E_mail_client.Properties.Resources.archive;
-            this.linkLabel9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel9.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel9.Location = new System.Drawing.Point(8, 216);
-            this.linkLabel9.Name = "linkLabel9";
-            this.linkLabel9.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel9.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel9.TabIndex = 8;
-            this.linkLabel9.TabStop = true;
-            this.linkLabel9.Text = "Архив";
-            // 
-            // treeViewFolder
-            // 
-            this.treeViewFolder.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.treeViewFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.treeViewFolder.Location = new System.Drawing.Point(3, 269);
-            this.treeViewFolder.Name = "treeViewFolder";
-            this.treeViewFolder.Size = new System.Drawing.Size(194, 286);
-            this.treeViewFolder.TabIndex = 9;
             // 
             // dataGridViewMessages
             // 
@@ -317,7 +342,7 @@
             this.dataGridViewMessages.ReadOnly = true;
             this.dataGridViewMessages.RowHeadersVisible = false;
             this.dataGridViewMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewMessages.Size = new System.Drawing.Size(640, 536);
+            this.dataGridViewMessages.Size = new System.Drawing.Size(407, 385);
             this.dataGridViewMessages.TabIndex = 0;
             // 
             // DateMessage
@@ -341,22 +366,6 @@
             this.Status.Name = "Status";
             this.Status.ReadOnly = true;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel1.Image = global::E_mail_client.Properties.Resources.inbox;
-            this.linkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.LinkColor = System.Drawing.SystemColors.ControlText;
-            this.linkLabel1.Location = new System.Drawing.Point(8, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Padding = new System.Windows.Forms.Padding(24, 4, 5, 6);
-            this.linkLabel1.Size = new System.Drawing.Size(186, 27);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Входящие";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // tableLayoutPanelNameEmail
             // 
             this.tableLayoutPanelNameEmail.BackColor = System.Drawing.SystemColors.Control;
@@ -370,7 +379,7 @@
             this.tableLayoutPanelNameEmail.RowCount = 1;
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(1289, 40);
+            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(882, 40);
             this.tableLayoutPanelNameEmail.TabIndex = 0;
             // 
             // labelNameEmail
@@ -383,7 +392,7 @@
             this.labelNameEmail.Location = new System.Drawing.Point(3, 3);
             this.labelNameEmail.Margin = new System.Windows.Forms.Padding(3);
             this.labelNameEmail.Name = "labelNameEmail";
-            this.labelNameEmail.Size = new System.Drawing.Size(1283, 34);
+            this.labelNameEmail.Size = new System.Drawing.Size(876, 34);
             this.labelNameEmail.TabIndex = 0;
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -392,7 +401,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1289, 644);
+            this.ClientSize = new System.Drawing.Size(882, 493);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -407,8 +416,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClose);
             this.panelButton.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.panelFolders.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMessages)).EndInit();
             this.tableLayoutPanelNameEmail.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.PerformLayout();
@@ -425,16 +434,16 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.LinkLabel linkLabel9;
-        private System.Windows.Forms.LinkLabel linkLabel8;
-        private System.Windows.Forms.LinkLabel linkLabel7;
-        private System.Windows.Forms.LinkLabel linkLabel6;
-        private System.Windows.Forms.LinkLabel linkLabel5;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Panel panelFolders;
+        private System.Windows.Forms.LinkLabel linkLabelArchive;
+        private System.Windows.Forms.LinkLabel linkLabelAll;
+        private System.Windows.Forms.LinkLabel linkLabelTrash;
+        private System.Windows.Forms.LinkLabel linkLabelJunk;
+        private System.Windows.Forms.LinkLabel linkLabelFlagged;
+        private System.Windows.Forms.LinkLabel linkLabelImportant;
+        private System.Windows.Forms.LinkLabel linkLabelDrafts;
+        private System.Windows.Forms.LinkLabel linkLabelSent;
+        private System.Windows.Forms.LinkLabel linkLabelInbox;
         private System.Windows.Forms.TreeView treeViewFolder;
         private System.Windows.Forms.DataGridView dataGridViewMessages;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateMessage;
