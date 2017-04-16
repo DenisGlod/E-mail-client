@@ -18,14 +18,14 @@ namespace E_mail_client
             CommonFolderCollection listFolders = client.Folders;
             foreach (Folder folder in listFolders)
             {
-                if (VisibleLinkLable(folder))
+                VisibleLinkLable(folder);
+
+                TreeNode parentNode = treeViewFolder.Nodes.Add(folder.Name);
+                if (folder.HasChildren)
                 {
-                    TreeNode parentNode = treeViewFolder.Nodes.Add(folder.Name);
-                    if (folder.HasChildren)
-                    {
-                        AddTreeViewFolder(folder.SubFolders, parentNode);
-                    }
+                    AddTreeViewFolder(folder.SubFolders, parentNode);
                 }
+
             }
 
         }
@@ -111,6 +111,7 @@ namespace E_mail_client
         }
         private void FormClose(object sender, FormClosingEventArgs e)
         {
+            client.Disconnect();
             Application.Exit();
         }
 

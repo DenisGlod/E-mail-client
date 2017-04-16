@@ -54,6 +54,9 @@
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panelButton.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
@@ -93,6 +96,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.treeViewFolder);
+            this.groupBox1.Controls.Add(this.panel3);
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.panelFolders);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -106,11 +112,12 @@
             // treeViewFolder
             // 
             this.treeViewFolder.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.treeViewFolder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.treeViewFolder.Location = new System.Drawing.Point(3, 269);
+            this.treeViewFolder.Location = new System.Drawing.Point(3, 287);
             this.treeViewFolder.Name = "treeViewFolder";
-            this.treeViewFolder.Size = new System.Drawing.Size(194, 135);
+            this.treeViewFolder.Size = new System.Drawing.Size(194, 117);
             this.treeViewFolder.TabIndex = 9;
             // 
             // panelFolders
@@ -128,7 +135,7 @@
             this.panelFolders.Location = new System.Drawing.Point(3, 19);
             this.panelFolders.Name = "panelFolders";
             this.panelFolders.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.panelFolders.Size = new System.Drawing.Size(194, 250);
+            this.panelFolders.Size = new System.Drawing.Size(194, 247);
             this.panelFolders.TabIndex = 8;
             // 
             // linkLabelArchive
@@ -397,6 +404,33 @@
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 276);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(194, 1);
+            this.panel1.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 266);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(194, 10);
+            this.panel2.TabIndex = 10;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 277);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(194, 10);
+            this.panel3.TabIndex = 11;
+            // 
             // EMailClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,5 +485,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelNameEmail;
         private System.Windows.Forms.Label labelNameEmail;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
     }
 }

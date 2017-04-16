@@ -77,8 +77,6 @@ namespace E_mail_client
             timer.Enabled = false;
             new EMailClient(client, email).Visible = true;
             Visible = false;
-            Clear();
-
         }
         private void HideErrorMessage(object Sender, EventArgs e)
         {
@@ -101,6 +99,7 @@ namespace E_mail_client
                 labelErrorMessage.Visible = true;
                 timer.Tick -= HideErrorMessage;
                 timer.Tick += OpenFormEmailClient;
+                timer.Interval = 1000;
                 timer.Enabled = true;
                 buttonLogin.Enabled = false;
                 comboBoxHost.Enabled = false;
@@ -125,6 +124,11 @@ namespace E_mail_client
             textBoxEmail.Clear();
             textBoxPassword.Clear();
             textBoxPassword.UseSystemPasswordChar = true;
+        }
+
+        private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            client.Disconnect();
         }
     }
 }
