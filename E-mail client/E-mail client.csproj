@@ -108,6 +108,7 @@
     <None Include="Resources\flag.png" />
     <None Include="Resources\empty_trash.png" />
     <None Include="Resources\archive.png" />
+    <None Include="Resources\download.gif" />
     <Content Include="Resources\email.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

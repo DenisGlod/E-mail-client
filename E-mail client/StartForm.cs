@@ -106,6 +106,7 @@ namespace E_mail_client
                 textBoxEmail.Enabled = false;
                 textBoxPassword.Enabled = false;
                 checkBoxShowPassword.Enabled = false;
+                pictureBox.Visible = true;
             }
         }
         private void CheckBoxShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -128,7 +129,9 @@ namespace E_mail_client
 
         private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            client.Disconnect();
+            if (client != null)
+                client.Disconnect();
+            Application.Exit();
         }
     }
 }

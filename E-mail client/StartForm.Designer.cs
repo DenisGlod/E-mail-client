@@ -40,11 +40,13 @@
             this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.labelErrorMessage = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,17 +147,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Авторизация";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::E_mail_client.Properties.Resources.email;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(54, 45);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -184,11 +175,35 @@
             this.timer.Interval = 4000;
             this.timer.Tick += new System.EventHandler(this.HideErrorMessage);
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Image = global::E_mail_client.Properties.Resources.download;
+            this.pictureBox.InitialImage = null;
+            this.pictureBox.Location = new System.Drawing.Point(9, 96);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(384, 154);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox.TabIndex = 11;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::E_mail_client.Properties.Resources.email;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(54, 45);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // StartForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(405, 279);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.labelErrorMessage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
@@ -210,6 +225,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -232,6 +248,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelErrorMessage;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
 
