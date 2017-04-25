@@ -3,7 +3,6 @@ using ImapX.Collections;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace E_mail_client

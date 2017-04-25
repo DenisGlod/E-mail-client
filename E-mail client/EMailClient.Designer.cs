@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EMailClient));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeViewFolder = new System.Windows.Forms.TreeView();
@@ -49,18 +48,18 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgvMessages = new System.Windows.Forms.DataGridView();
             this.panelButton = new System.Windows.Forms.Panel();
             this.buttonDeleteMessage = new System.Windows.Forms.Button();
             this.buttonNewMessage = new System.Windows.Forms.Button();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
-            this.dgvMessages = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.panelButton.SuspendLayout();
             this.tableLayoutPanelNameEmail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -74,7 +73,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(0, 40);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 364);
+            this.groupBox1.Size = new System.Drawing.Size(200, 422);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Папки";
@@ -89,7 +88,7 @@
             this.treeViewFolder.HideSelection = false;
             this.treeViewFolder.Location = new System.Drawing.Point(3, 293);
             this.treeViewFolder.Name = "treeViewFolder";
-            this.treeViewFolder.Size = new System.Drawing.Size(194, 68);
+            this.treeViewFolder.Size = new System.Drawing.Size(194, 126);
             this.treeViewFolder.TabIndex = 9;
             this.treeViewFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolder_AfterSelect);
             // 
@@ -295,9 +294,9 @@
             // 
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.groupBox3.Location = new System.Drawing.Point(634, 40);
+            this.groupBox3.Location = new System.Drawing.Point(616, 40);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(263, 364);
+            this.groupBox3.Size = new System.Drawing.Size(263, 422);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
@@ -306,16 +305,16 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 40);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 364);
+            this.splitter1.Size = new System.Drawing.Size(3, 422);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(631, 40);
+            this.splitter2.Location = new System.Drawing.Point(613, 40);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 364);
+            this.splitter2.Size = new System.Drawing.Size(3, 422);
             this.splitter2.TabIndex = 6;
             this.splitter2.TabStop = false;
             // 
@@ -327,10 +326,29 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(203, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(428, 364);
+            this.groupBox2.Size = new System.Drawing.Size(410, 422);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Письма";
+            // 
+            // dgvMessages
+            // 
+            this.dgvMessages.AllowUserToAddRows = false;
+            this.dgvMessages.AllowUserToDeleteRows = false;
+            this.dgvMessages.AllowUserToResizeRows = false;
+            this.dgvMessages.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMessages.BackgroundColor = System.Drawing.Color.White;
+            this.dgvMessages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMessages.Location = new System.Drawing.Point(3, 19);
+            this.dgvMessages.MultiSelect = false;
+            this.dgvMessages.Name = "dgvMessages";
+            this.dgvMessages.ReadOnly = true;
+            this.dgvMessages.RowHeadersVisible = false;
+            this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMessages.Size = new System.Drawing.Size(404, 358);
+            this.dgvMessages.TabIndex = 3;
             // 
             // panelButton
             // 
@@ -338,15 +356,15 @@
             this.panelButton.Controls.Add(this.buttonNewMessage);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelButton.Location = new System.Drawing.Point(3, 319);
+            this.panelButton.Location = new System.Drawing.Point(3, 377);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(422, 42);
+            this.panelButton.Size = new System.Drawing.Size(404, 42);
             this.panelButton.TabIndex = 2;
             // 
             // buttonDeleteMessage
             // 
             this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonDeleteMessage.Location = new System.Drawing.Point(220, 10);
+            this.buttonDeleteMessage.Location = new System.Drawing.Point(211, 10);
             this.buttonDeleteMessage.Name = "buttonDeleteMessage";
             this.buttonDeleteMessage.Size = new System.Drawing.Size(131, 23);
             this.buttonDeleteMessage.TabIndex = 1;
@@ -356,7 +374,7 @@
             // buttonNewMessage
             // 
             this.buttonNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonNewMessage.Location = new System.Drawing.Point(66, 10);
+            this.buttonNewMessage.Location = new System.Drawing.Point(57, 10);
             this.buttonNewMessage.Name = "buttonNewMessage";
             this.buttonNewMessage.Size = new System.Drawing.Size(112, 23);
             this.buttonNewMessage.TabIndex = 0;
@@ -376,7 +394,7 @@
             this.tableLayoutPanelNameEmail.RowCount = 1;
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(897, 40);
+            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(879, 40);
             this.tableLayoutPanelNameEmail.TabIndex = 0;
             // 
             // labelNameEmail
@@ -389,43 +407,16 @@
             this.labelNameEmail.Location = new System.Drawing.Point(3, 3);
             this.labelNameEmail.Margin = new System.Windows.Forms.Padding(3);
             this.labelNameEmail.Name = "labelNameEmail";
-            this.labelNameEmail.Size = new System.Drawing.Size(891, 34);
+            this.labelNameEmail.Size = new System.Drawing.Size(873, 34);
             this.labelNameEmail.TabIndex = 0;
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dgvMessages
-            // 
-            this.dgvMessages.AllowUserToAddRows = false;
-            this.dgvMessages.AllowUserToDeleteRows = false;
-            this.dgvMessages.AllowUserToResizeRows = false;
-            this.dgvMessages.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMessages.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvMessages.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvMessages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMessages.Location = new System.Drawing.Point(3, 19);
-            this.dgvMessages.MultiSelect = false;
-            this.dgvMessages.Name = "dgvMessages";
-            this.dgvMessages.ReadOnly = true;
-            this.dgvMessages.RowHeadersVisible = false;
-            this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMessages.Size = new System.Drawing.Size(422, 300);
-            this.dgvMessages.TabIndex = 3;
             // 
             // EMailClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 404);
+            this.ClientSize = new System.Drawing.Size(879, 462);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -440,10 +431,10 @@
             this.groupBox1.ResumeLayout(false);
             this.panelFolders.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.panelButton.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.ResumeLayout(false);
 
         }
