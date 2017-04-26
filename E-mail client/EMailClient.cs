@@ -1,6 +1,5 @@
 ﻿using ImapX;
 using ImapX.Collections;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,19 +8,20 @@ namespace E_mail_client
 {
     public partial class EMailClient : Form
     {
-        private ImapClient client;
-        private Dictionary<LinkLabel, TreeNode> key;
+        private ImapClient _client;
+        private Dictionary<LinkLabel, TreeNode> _key;
+        private List<ImapX.Message> _messageList;
 
         public EMailClient(ImapClient client, string email)
         {
             InitializeComponent();
             treeViewFolder.HideSelection = false;
             panelFolders.Height = 0;
-            this.client = client;
+            _client = client;
             labelNameEmail.Text = email;
             client.Behavior.AutoPopulateFolderMessages = true;
             CommonFolderCollection listFolders = client.Folders;
-            key = new Dictionary<LinkLabel, TreeNode>();
+            _key = new Dictionary<LinkLabel, TreeNode>();
             foreach (Folder folder in listFolders)
             {
                 TreeNode parentNode = treeViewFolder.Nodes.Add(folder.Name);
@@ -35,67 +35,67 @@ namespace E_mail_client
 
         private bool VisibleLinkLable(Folder folder, TreeNode node)
         {
-            if (folder == client.Folders.Inbox)
+            if (folder == _client.Folders.Inbox)
             {
                 lnkInbox.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkInbox, node);
+                _key.Add(lnkInbox, node);
                 return false;
             }
-            if (folder == client.Folders.Sent)
+            if (folder == _client.Folders.Sent)
             {
                 lnkSent.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkSent, node);
+                _key.Add(lnkSent, node);
                 return false;
             }
-            if (folder == client.Folders.Drafts)
+            if (folder == _client.Folders.Drafts)
             {
                 lnkDrafts.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkDrafts, node);
+                _key.Add(lnkDrafts, node);
                 return false;
             }
-            if (folder == client.Folders.Important)
+            if (folder == _client.Folders.Important)
             {
                 lnkImportant.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkImportant, node);
+                _key.Add(lnkImportant, node);
                 return false;
             }
-            if (folder == client.Folders.Flagged)
+            if (folder == _client.Folders.Flagged)
             {
                 lnkFlagged.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkFlagged, node);
+                _key.Add(lnkFlagged, node);
                 return false;
             }
-            if (folder == client.Folders.Junk)
+            if (folder == _client.Folders.Junk)
             {
                 lnkJunk.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkJunk, node);
+                _key.Add(lnkJunk, node);
                 return false;
             }
-            if (folder == client.Folders.Trash)
+            if (folder == _client.Folders.Trash)
             {
                 lnkTrash.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkTrash, node);
+                _key.Add(lnkTrash, node);
                 return false;
             }
-            if (folder == client.Folders.All)
+            if (folder == _client.Folders.All)
             {
                 lnkAll.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkAll, node);
+                _key.Add(lnkAll, node);
                 return false;
             }
-            if (folder == client.Folders.Archive)
+            if (folder == _client.Folders.Archive)
             {
                 lnkArchive.Visible = true;
                 panelFolders.Height += 27;
-                key.Add(lnkArchive, node);
+                _key.Add(lnkArchive, node);
                 return false;
             }
             return true;
@@ -115,7 +115,7 @@ namespace E_mail_client
 
         private void FormClose(object sender, FormClosingEventArgs e)
         {
-            client.Disconnect();
+            _client.Disconnect();
             Application.Exit();
         }
 
@@ -131,12 +131,12 @@ namespace E_mail_client
                                        lnkSent.Font =
                                            lnkTrash.Font = new Font(lnkTrash.Font, FontStyle.Regular);
             LinkLabel link = (LinkLabel)sender;
-            key.TryGetValue(link, out TreeNode node);
+            _key.TryGetValue(link, out TreeNode node);
             treeViewFolder.SelectedNode = node;
             link.Font = new Font(link.Font, FontStyle.Bold);
         }
 
-        private void treeViewFolder_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeViewFolder_AfterSelect(object sender, TreeViewEventArgs e)
         {
             dgvMessages.Columns.Clear();
             dgvMessages.Columns.Add("from", "От");
@@ -144,21 +144,44 @@ namespace E_mail_client
             dgvMessages.Columns.Add("status", "Статус");
             if (treeViewFolder.Focus())
             {
-                var folder = client.Folders.Find(treeViewFolder.SelectedNode.Text);
+                var folder = _client.Folders.Find(treeViewFolder.SelectedNode.Text);
 
                 if (folder != null)
                 {
-                    var messageList = folder.Messages;
-                    var iMessage = messageList.GetEnumerator();
+                    _messageList = new List<ImapX.Message>();
+                    _messageList.InsertRange(0, folder.Messages);
+                    var iMessage = _messageList.GetEnumerator();
                     while (iMessage.MoveNext())
                     {
                         if (iMessage.Current != null)
                         {
                             dgvMessages.Rows.Add(new object[] { iMessage.Current.From, iMessage.Current.Subject, iMessage.Current.Seen ? "Просмотрено" : "Новое" });
-                            Console.WriteLine(iMessage.Current.Date.Value.ToString());
-                            Console.WriteLine(iMessage.Current.Subject);
                         }
                     }
+                }
+            }
+        }
+
+        private void dgvMessages_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                labelDate.Text = string.Join("", "Дата: ", _messageList[e.RowIndex].Date.ToString());
+                labelTheme.Text = string.Join("", "Тема: ", _messageList[e.RowIndex].Subject);
+                labelFrom.Text = string.Join("", "От: ", _messageList[e.RowIndex].From);
+                string _to = "Кому: ";
+                _messageList[e.RowIndex].To.ForEach(delegate (MailAddress m) { _to += string.Join(" ", m); });
+                labelTo.Text = _to;
+                MessageBody body = _messageList[e.RowIndex].Body;
+                if (body.HasHtml)
+                {
+                    int i = body.Html.LastIndexOf("IMAPX");
+                    webBrowser.DocumentText = body.Html.Remove(i - 3, 34);
+                }
+                else
+                {
+                    int i = body.Text.LastIndexOf("IMAPX");
+                    webBrowser.DocumentText = body.Text.Remove(i - 3, 34);
                 }
             }
         }

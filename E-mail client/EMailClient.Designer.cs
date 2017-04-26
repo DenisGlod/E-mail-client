@@ -45,6 +45,15 @@
             this.lnkSent = new System.Windows.Forms.LinkLabel();
             this.lnkInbox = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.labelAttachments = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.labelTo = new System.Windows.Forms.Label();
+            this.labelFrom = new System.Windows.Forms.Label();
+            this.labelTheme = new System.Windows.Forms.Label();
+            this.labelDate = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -56,6 +65,7 @@
             this.labelNameEmail = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.panelButton.SuspendLayout();
@@ -90,7 +100,7 @@
             this.treeViewFolder.Name = "treeViewFolder";
             this.treeViewFolder.Size = new System.Drawing.Size(194, 126);
             this.treeViewFolder.TabIndex = 9;
-            this.treeViewFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFolder_AfterSelect);
+            this.treeViewFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewFolder_AfterSelect);
             // 
             // panel3
             // 
@@ -292,6 +302,16 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox3.Controls.Add(this.webBrowser);
+            this.groupBox3.Controls.Add(this.labelAttachments);
+            this.groupBox3.Controls.Add(this.panel4);
+            this.groupBox3.Controls.Add(this.panel5);
+            this.groupBox3.Controls.Add(this.panel6);
+            this.groupBox3.Controls.Add(this.labelTo);
+            this.groupBox3.Controls.Add(this.labelFrom);
+            this.groupBox3.Controls.Add(this.labelTheme);
+            this.groupBox3.Controls.Add(this.labelDate);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.groupBox3.Location = new System.Drawing.Point(616, 40);
@@ -300,6 +320,106 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.AllowWebBrowserDrop = false;
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
+            this.webBrowser.Location = new System.Drawing.Point(3, 175);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.ScriptErrorsSuppressed = true;
+            this.webBrowser.Size = new System.Drawing.Size(257, 244);
+            this.webBrowser.TabIndex = 16;
+            // 
+            // labelAttachments
+            // 
+            this.labelAttachments.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelAttachments.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAttachments.Image = ((System.Drawing.Image)(resources.GetObject("labelAttachments.Image")));
+            this.labelAttachments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAttachments.Location = new System.Drawing.Point(3, 148);
+            this.labelAttachments.Name = "labelAttachments";
+            this.labelAttachments.Size = new System.Drawing.Size(257, 27);
+            this.labelAttachments.TabIndex = 15;
+            this.labelAttachments.Text = "Вложение";
+            this.labelAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Control;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 138);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(257, 10);
+            this.panel4.TabIndex = 14;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(3, 137);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(257, 1);
+            this.panel5.TabIndex = 12;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.Control;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(3, 127);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(257, 10);
+            this.panel6.TabIndex = 13;
+            // 
+            // labelTo
+            // 
+            this.labelTo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTo.Location = new System.Drawing.Point(3, 100);
+            this.labelTo.Name = "labelTo";
+            this.labelTo.Padding = new System.Windows.Forms.Padding(5);
+            this.labelTo.Size = new System.Drawing.Size(257, 27);
+            this.labelTo.TabIndex = 3;
+            this.labelTo.Text = "Кому: ";
+            this.labelTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelFrom
+            // 
+            this.labelFrom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFrom.Location = new System.Drawing.Point(3, 73);
+            this.labelFrom.Name = "labelFrom";
+            this.labelFrom.Padding = new System.Windows.Forms.Padding(5);
+            this.labelFrom.Size = new System.Drawing.Size(257, 27);
+            this.labelFrom.TabIndex = 2;
+            this.labelFrom.Text = "От: ";
+            this.labelFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelTheme
+            // 
+            this.labelTheme.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTheme.Location = new System.Drawing.Point(3, 46);
+            this.labelTheme.Name = "labelTheme";
+            this.labelTheme.Padding = new System.Windows.Forms.Padding(5);
+            this.labelTheme.Size = new System.Drawing.Size(257, 27);
+            this.labelTheme.TabIndex = 1;
+            this.labelTheme.Text = "Тема: ";
+            this.labelTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelDate
+            // 
+            this.labelDate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDate.Location = new System.Drawing.Point(3, 19);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Padding = new System.Windows.Forms.Padding(5);
+            this.labelDate.Size = new System.Drawing.Size(257, 27);
+            this.labelDate.TabIndex = 0;
+            this.labelDate.Text = "Дата: ";
+            this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // splitter1
             // 
@@ -338,6 +458,7 @@
             this.dgvMessages.AllowUserToResizeRows = false;
             this.dgvMessages.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMessages.BackgroundColor = System.Drawing.Color.White;
+            this.dgvMessages.ColumnHeadersHeight = 30;
             this.dgvMessages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvMessages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMessages.Location = new System.Drawing.Point(3, 19);
@@ -349,6 +470,7 @@
             this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMessages.Size = new System.Drawing.Size(404, 358);
             this.dgvMessages.TabIndex = 3;
+            this.dgvMessages.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMessages_CellContentClick);
             // 
             // panelButton
             // 
@@ -430,6 +552,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClose);
             this.groupBox1.ResumeLayout(false);
             this.panelFolders.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.panelButton.ResumeLayout(false);
@@ -465,5 +588,14 @@
         private System.Windows.Forms.Button buttonDeleteMessage;
         private System.Windows.Forms.Button buttonNewMessage;
         private System.Windows.Forms.DataGridView dgvMessages;
+        private System.Windows.Forms.Label labelAttachments;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label labelTo;
+        private System.Windows.Forms.Label labelFrom;
+        private System.Windows.Forms.Label labelTheme;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }
