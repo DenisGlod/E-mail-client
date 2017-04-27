@@ -1,81 +1,85 @@
-﻿using ImapX;
+﻿using MailKit.Net.Imap;
+using MailKit.Security;
 using System;
-using System.Security.Authentication;
 using System.Windows.Forms;
 
 namespace E_mail_client
 {
-    public partial class StartForm : Form
+    public partial class LoginForm : Form
     {
-        private const string emailNullOrEmpty = "Email не может быть пустым!";
-        private const string passwordNullOrEmpty = "Пароль не может быть пустым!";
-        private const string errorEmailOrPassword = "Неверный логин или пароль!";
-        private const string exceptionConnect = "Неудалось подключиться к серверу!";
-        private const string success = "Авторизация успешна.";
+        private const string EmailEmpty = "Email не может быть пустым!";
+        private const string PasswordEmpty = "Пароль не может быть пустым!";
+        private const string ErrorEmailOrPassword = "Неверный логин или пароль!";
+        private const string SuccessConnect = "Авторизация успешна.";
 
-        private const string gmailHost = "imap.gmail.com";
-        private const string outlookHost = "imap-mail.outlook.com";
-        private const string yandexHost = "imap.yandex.ru";
-        private const int portImap = 993;
-        private string email;
-        private ImapClient client;
-        public StartForm()
+        private const string GmailHost = "imap.gmail.com";
+        private const string OutlookHost = "imap-mail.outlook.com";
+        private const string YandexHost = "imap.yandex.ru";
+        private const int PortImap = 993;
+
+        private ClientProfile _clientProfile;
+
+        public LoginForm()
         {
             InitializeComponent();
             comboBoxHost.SelectedIndex = 0;
         }
-        private void Login(object sender, EventArgs e)
+
+        private void Login_Click(object sender, EventArgs e)
         {
-            int host = comboBoxHost.SelectedIndex;
-            email = textBoxEmail.Text;
+            int indexHost = comboBoxHost.SelectedIndex;
+            string email = textBoxEmail.Text;
             string password = textBoxPassword.Text;
             if (string.IsNullOrEmpty(email))
             {
-                Message(emailNullOrEmpty, true);
+                Message(EmailEmpty, true);
             }
             else if (string.IsNullOrEmpty(password))
             {
-                Message(passwordNullOrEmpty, true);
+                Message(PasswordEmpty, true);
             }
             else
             {
-                switch (host)
+                switch (indexHost)
                 {
                     case 0:
-                        Conect(gmailHost, email, password);
+                        Conect(GmailHost, email, password);
                         break;
                     case 1:
-                        Conect(outlookHost, email, password);
+                        Conect(OutlookHost, email, password);
                         break;
                     case 2:
-                        Conect(yandexHost, email, password);
+                        Conect(YandexHost, email, password);
                         break;
                 }
             }
         }
         private void Conect(string host, string email, string password)
         {
-            client = new ImapClient(host, portImap, SslProtocols.Tls, true);
-            if (client.Connect())
+            try
             {
-                if (client.Login(email, password))
+                ImapClient imapClient = new ImapClient();
+                imapClient.Connect(host, PortImap, SecureSocketOptions.SslOnConnect);
+                imapClient.Authenticate(email, password);
+                _clientProfile = new ClientProfile(imapClient, email, password, host, PortImap);
+                Message(SuccessConnect, false);
+            }
+            catch (Exception e)
+            {
+                if (e is AuthenticationException || e is ImapProtocolException)
                 {
-                    Message(success, false);
+                    Message(ErrorEmailOrPassword, true);
                 }
                 else
                 {
-                    Message(errorEmailOrPassword, true);
+                    Message(e.Message, true);
                 }
-            }
-            else
-            {
-                Message(exceptionConnect, true);
             }
         }
         private void OpenFormEmailClient(object sender, EventArgs e)
         {
             timer.Enabled = false;
-            new EMailClient(client, email).Visible = true;
+            new ClientForm(_clientProfile).Visible = true;
             Visible = false;
         }
         private void HideErrorMessage(object Sender, EventArgs e)
@@ -129,8 +133,8 @@ namespace E_mail_client
 
         private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (client != null)
-                client.Disconnect();
+            if (_clientProfile.Client != null)
+                _clientProfile.Client.Disconnect(true);
             Application.Exit();
         }
     }

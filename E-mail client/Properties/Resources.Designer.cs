@@ -83,6 +83,16 @@ namespace E_mail_client.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap download {
             get {
                 object obj = ResourceManager.GetObject("download", resourceCulture);
@@ -156,6 +166,16 @@ namespace E_mail_client.Properties {
         internal static System.Drawing.Bitmap mails {
             get {
                 object obj = ResourceManager.GetObject("mails", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap new_message {
+            get {
+                object obj = ResourceManager.GetObject("new_message", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
