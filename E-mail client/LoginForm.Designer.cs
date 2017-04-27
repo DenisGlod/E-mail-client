@@ -189,7 +189,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::E_mail_client.Properties.Resources.email;
+            this.pictureBox1.Image = global::E_mail_client.Properties.Resources.email1;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(12, 2);
             this.pictureBox1.Name = "pictureBox1";

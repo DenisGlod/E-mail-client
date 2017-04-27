@@ -377,7 +377,7 @@
             // 
             this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonDeleteMessage.Enabled = false;
-            this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete;
+            this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
             this.buttonDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonDeleteMessage.Location = new System.Drawing.Point(302, 8);
             this.buttonDeleteMessage.Name = "buttonDeleteMessage";
