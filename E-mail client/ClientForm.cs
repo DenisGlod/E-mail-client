@@ -1,11 +1,11 @@
 ﻿using MailKit;
-using MailKit.Net.Imap;
 using MailKit.Search;
 using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace E_mail_client
@@ -14,6 +14,9 @@ namespace E_mail_client
     {
         private ClientProfile _clientProfile;
         private Dictionary<LinkLabel, TreeNode> _key;
+        private IMailFolder _openFolder;
+        private List<UniqueId> _messageList;
+        private IList<IMailFolder> _folders;
 
         public ClientForm(ClientProfile clientProfile)
         {
@@ -27,7 +30,7 @@ namespace E_mail_client
 
         private void InitFolders()
         {
-            var _folders = _clientProfile.Client.GetFolders(_clientProfile.Client.PersonalNamespaces.First());
+            _folders = _clientProfile.Client.GetFolders(_clientProfile.Client.PersonalNamespaces.First());
             _folders.ToList().ForEach(f =>
             {
                 if (!f.ParentFolder.Name.Equals(""))
@@ -148,53 +151,56 @@ namespace E_mail_client
 
         private void TreeViewFolder_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if(!_clientProfile.Client.IsConnected || !_clientProfile.Client.IsAuthenticated)
+            if (!_clientProfile.Client.IsConnected || !_clientProfile.Client.IsAuthenticated)
             {
                 _clientProfile.Reconnect();
+            }
+            if (Regex.Match(treeViewFolder.SelectedNode.Text, @"\[.*\]").Success)
+            {
+                return;
             }
             dgvMessages.Columns.Clear();
             dgvMessages.Columns.Add("from", "От");
             dgvMessages.Columns.Add("theme", "Тема");
             dgvMessages.Columns.Add("status", "Статус");
-            string path = treeViewFolder.SelectedNode.FullPath.Replace('\\', '|');
-            var folder = _clientProfile.Client.GetFolder(path);
-            folder.Open(FolderAccess.ReadOnly);
-            var uids = folder.Search(SearchQuery.All);
+            foreach(IMailFolder f in _folders)
+            {
+                if(Regex.IsMatch(f.FullName, e.Node.Text))
+                {
+                    _openFolder = f;
+                    break;
+                }
+            }
+            
+            _openFolder.Open(FolderAccess.ReadOnly);
+            var uids = _openFolder.Search(SearchQuery.All);
             if (uids.Count > 0)
             {
-                folder.Search(SearchQuery.All).ToList().ForEach(uid =>
+                _messageList = _openFolder.Search(SearchQuery.All).ToList();
+                _messageList.ForEach(uid =>
                 {
-                    MimeMessage mimeMessage = folder.GetMessage(uid);
-                    dgvMessages.Rows.Add(new object[] { mimeMessage.From, mimeMessage.Subject, folder.Search(SearchQuery.NotSeen).Contains(uid) ? "Новое" : "Прочитано" });
+                    MimeMessage mimeMessage = _openFolder.GetMessage(uid);
+                    dgvMessages.Rows.Add(new object[] { mimeMessage.From, mimeMessage.Subject, _openFolder.Search(SearchQuery.NotSeen).Contains(uid) ? "Новое" : "Прочитано" });
                 });
             }
-            folder.Close();
+            _openFolder.Close();
         }
 
         private void DgvMessages_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             buttonDeleteMessage.Enabled = true;
-            /*if (e.RowIndex > -1)
+            if (e.RowIndex > -1)
             {
-                labelDate.Text = string.Join("", "Дата: ", _messageList[e.RowIndex].Date.ToString());
-                labelTheme.Text = string.Join("", "Тема: ", _messageList[e.RowIndex].Subject);
-                labelFrom.Text = string.Join("", "От: ", _messageList[e.RowIndex].From);
+                _openFolder.Open(FolderAccess.ReadOnly);
+                labelDate.Text = string.Join("", "Дата: ", _openFolder.GetMessage(_messageList[e.RowIndex]).Date);
+                labelTheme.Text = string.Join("", "Тема: ", _openFolder.GetMessage(_messageList[e.RowIndex]).Subject);
+                labelFrom.Text = string.Join("", "От: ", _openFolder.GetMessage(_messageList[e.RowIndex]).From);
                 string _to = "Кому: ";
-                _messageList[e.RowIndex].To.ForEach(delegate (MailAddress m) { _to += string.Join(" ", m); });
+                _openFolder.GetMessage(_messageList[e.RowIndex]).To.ToList().ForEach(m => { _to += string.Join(" ", m); });
                 labelTo.Text = _to;
-                MessageBody body = _messageList[e.RowIndex].Body;
-                Console.WriteLine(body.Text);
-                if (body.HasHtml)
-                {
-                    //int i = body.Html.LastIndexOf("IMAPX");
-                    webBrowser.DocumentText = body.Html;//.Remove(i - 3, 34);
-                }
-                else
-                {
-                    //int i = body.Text.LastIndexOf("IMAPX");
-                    webBrowser.DocumentText = body.Text;//.Remove(i - 3, 34);
-                }
-            }*/
+                var body = _openFolder.GetMessage(_messageList[e.RowIndex]).Body;
+                Console.WriteLine(body.ToString());
+            }
         }
     }
 }
