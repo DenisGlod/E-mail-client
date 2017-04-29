@@ -30,7 +30,7 @@ namespace E_mail_client
 
         protected virtual void OnProgressChanged()
         {
-            Volatile.Read(ref ProgressChanged)?.BeginInvoke(this, Percents, null, null);
+            Volatile.Read(ref ProgressChanged)?.Invoke(this, Percents);
         }
     }
 }

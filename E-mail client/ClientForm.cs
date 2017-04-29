@@ -17,6 +17,7 @@ namespace E_mail_client
         private Dictionary<LinkLabel, TreeNode> _key;
         private IMailFolder _openFolder;
         private IList<IMailFolder> _folders;
+        private TransferProgress _tProgress;
 
         public ClientForm(ClientProfile clientProfile)
         {
@@ -26,6 +27,8 @@ namespace E_mail_client
             labelNameEmail.Text = _clientProfile.Email;
             _key = new Dictionary<LinkLabel, TreeNode>();
             InitFolders();
+            _tProgress = new TransferProgress();
+            _tProgress.ProgressChanged += (s, percent) => { BeginInvoke((MethodInvoker)(() => { progressBar.Value = percent; Console.WriteLine(percent); })); };
         }
 
         private async void InitFolders()
@@ -208,14 +211,12 @@ namespace E_mail_client
             buttonDeleteMessage.Enabled = true;
             labelAttachments.Visible = false;
             progressBar.Visible = true;
+            progressBar.Value = 0;
             if (e.RowIndex > -1)
             {
                 await _openFolder.OpenAsync(FolderAccess.ReadWrite);
                 var messageUid = UniqueId.Parse(((DataGridView)sender).CurrentRow.Cells[0].Value.ToString());
-                TransferProgress progress = new TransferProgress();
-                var message = _openFolder.GetMessageAsync(messageUid, new CancellationToken(), progress).Result;
-                progress.ProgressChanged += (s, percent) => { progressBar.Value = percent; };
-                progressBar.Visible = false;
+                var message = await _openFolder.GetMessageAsync(messageUid, new CancellationToken(), _tProgress);
                 labelDate.Text = string.Join("", "Дата: ", message.Date.DateTime);
                 labelTheme.Text = string.Join("", "Тема: ", message.Subject);
                 labelFrom.Text = string.Join("", "От: ", message.From);
@@ -249,6 +250,7 @@ namespace E_mail_client
                     dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
                 }
             }
+            //progressBar.Visible = false;
         }
 
         private void Progress_ProgressChanged(object sender, double e)
