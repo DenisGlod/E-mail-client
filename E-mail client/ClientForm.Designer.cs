@@ -45,6 +45,7 @@
             this.lnkSent = new System.Windows.Forms.LinkLabel();
             this.lnkInbox = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.labelAttachments = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -57,24 +58,21 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.picDownload = new System.Windows.Forms.PictureBox();
             this.dgvMessages = new System.Windows.Forms.DataGridView();
-            this.from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.theme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelButton = new System.Windows.Forms.Panel();
             this.buttonDeleteMessage = new System.Windows.Forms.Button();
             this.buttonNewMessage = new System.Windows.Forms.Button();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
-            this.picDownload = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.panelButton.SuspendLayout();
             this.tableLayoutPanelNameEmail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDownload)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -308,6 +306,7 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox3.Controls.Add(this.progressBar);
             this.groupBox3.Controls.Add(this.webBrowser);
             this.groupBox3.Controls.Add(this.labelAttachments);
             this.groupBox3.Controls.Add(this.panel4);
@@ -325,6 +324,14 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(55, 228);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(302, 23);
+            this.progressBar.TabIndex = 17;
+            this.progressBar.Visible = false;
             // 
             // webBrowser
             // 
@@ -349,6 +356,7 @@
             this.labelAttachments.TabIndex = 15;
             this.labelAttachments.Text = "Вложение";
             this.labelAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelAttachments.Visible = false;
             // 
             // panel4
             // 
@@ -456,6 +464,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Письма";
             // 
+            // picDownload
+            // 
+            this.picDownload.BackColor = System.Drawing.Color.White;
+            this.picDownload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picDownload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
+            this.picDownload.Location = new System.Drawing.Point(3, 19);
+            this.picDownload.Name = "picDownload";
+            this.picDownload.Size = new System.Drawing.Size(533, 474);
+            this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picDownload.TabIndex = 4;
+            this.picDownload.TabStop = false;
+            this.picDownload.Visible = false;
+            // 
             // dgvMessages
             // 
             this.dgvMessages.AllowUserToAddRows = false;
@@ -465,10 +487,6 @@
             this.dgvMessages.BackgroundColor = System.Drawing.Color.White;
             this.dgvMessages.ColumnHeadersHeight = 30;
             this.dgvMessages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvMessages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.from,
-            this.theme,
-            this.status});
             this.dgvMessages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMessages.Location = new System.Drawing.Point(3, 19);
             this.dgvMessages.MultiSelect = false;
@@ -480,24 +498,7 @@
             this.dgvMessages.Size = new System.Drawing.Size(533, 474);
             this.dgvMessages.TabIndex = 3;
             this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellContentClick);
-            // 
-            // from
-            // 
-            this.from.HeaderText = "От";
-            this.from.Name = "from";
-            this.from.ReadOnly = true;
-            // 
-            // theme
-            // 
-            this.theme.HeaderText = "Тема";
-            this.theme.Name = "theme";
-            this.theme.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Статус";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
+            this.dgvMessages.Leave += new System.EventHandler(this.DgvMessages_Leave);
             // 
             // panelButton
             // 
@@ -568,20 +569,6 @@
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // picDownload
-            // 
-            this.picDownload.BackColor = System.Drawing.Color.White;
-            this.picDownload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picDownload.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
-            this.picDownload.Location = new System.Drawing.Point(3, 19);
-            this.picDownload.Name = "picDownload";
-            this.picDownload.Size = new System.Drawing.Size(533, 474);
-            this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picDownload.TabIndex = 4;
-            this.picDownload.TabStop = false;
-            this.picDownload.Visible = false;
-            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -602,11 +589,11 @@
             this.panelFolders.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.panelButton.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -646,9 +633,7 @@
         private System.Windows.Forms.Label labelTheme;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.WebBrowser webBrowser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn from;
-        private System.Windows.Forms.DataGridViewTextBoxColumn theme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.PictureBox picDownload;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }

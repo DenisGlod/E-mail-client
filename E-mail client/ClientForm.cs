@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace E_mail_client
@@ -15,7 +16,6 @@ namespace E_mail_client
         private ClientProfile _clientProfile;
         private Dictionary<LinkLabel, TreeNode> _key;
         private IMailFolder _openFolder;
-        private List<UniqueId> _messageList;
         private IList<IMailFolder> _folders;
 
         public ClientForm(ClientProfile clientProfile)
@@ -160,7 +160,8 @@ namespace E_mail_client
                 treeViewFolder.Enabled = false;
                 picDownload.Visible = true;
                 dgvMessages.Columns.Clear();
-                dgvMessages.Columns.Add("from", "От");
+                int idUid = dgvMessages.Columns.Add("uid", "uid");
+                dgvMessages.Columns[idUid].Visible = false;
                 dgvMessages.Columns.Add("theme", "Тема");
                 dgvMessages.Columns.Add("status", "Статус");
                 dgvMessages.Columns[2].Width = 100;
@@ -173,41 +174,54 @@ namespace E_mail_client
                     }
                 }
                 await _openFolder.OpenAsync(FolderAccess.ReadOnly);
-                var uids = await _openFolder.SearchAsync(SearchQuery.All);
-                if (uids.Count > 0)
+                IList<UniqueId> _uidsListMessages = (await _openFolder.SearchAsync(SearchQuery.All)).ToList();
+                if (_uidsListMessages.Count > 0)
                 {
-                    _messageList = (await _openFolder.SearchAsync(SearchQuery.All)).ToList();
-                    _messageList.ForEach(uid =>
+                    var messageListNotSeen = (await _openFolder.SearchAsync(SearchQuery.NotSeen)).ToList();
+                    foreach (UniqueId uid in _uidsListMessages)
                     {
-                        MimeMessage mimeMessage = _openFolder.GetMessage(uid);
-                        int indexRow = dgvMessages.Rows.Add(new object[] { mimeMessage.From, mimeMessage.Subject, _openFolder.Search(SearchQuery.NotSeen).Contains(uid) ? "Новое" : "Прочитано" });
+                        HeaderList headerMessage = await _openFolder.GetHeadersAsync(uid);
+                        string subject = "";
+                        headerMessage.ToList().ForEach(h =>
+                        {
+                            if (h.Id == HeaderId.Subject)
+                            {
+                                subject = h.Value;
+                            }
+                        });
+                        int indexRow = dgvMessages.Rows.Add(new object[] { uid, subject, messageListNotSeen.Contains(uid) ? "Новое" : "Прочитано" });
                         if (dgvMessages.Rows[indexRow].Cells[2].Value.Equals("Новое"))
                         {
                             dgvMessages.Rows[indexRow].Cells[2].Style.ForeColor = Color.Green;
                             dgvMessages.Rows[indexRow].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Bold);
                         }
-                    });
+                    }
                 }
                 _openFolder.Close();
                 picDownload.Visible = false;
                 treeViewFolder.Enabled = true;
             }
-
         }
 
         private async void DgvMessages_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             buttonDeleteMessage.Enabled = true;
+            labelAttachments.Visible = false;
+            progressBar.Visible = true;
             if (e.RowIndex > -1)
             {
                 await _openFolder.OpenAsync(FolderAccess.ReadWrite);
-                MimeMessage message = await _openFolder.GetMessageAsync(_messageList[e.RowIndex]);
+                var messageUid = UniqueId.Parse(((DataGridView)sender).CurrentRow.Cells[0].Value.ToString());
+                TransferProgress progress = new TransferProgress();
+                var message = _openFolder.GetMessageAsync(messageUid, new CancellationToken(), progress).Result;
+                progress.ProgressChanged += (s, percent) => { progressBar.Value = percent; };
+                progressBar.Visible = false;
                 labelDate.Text = string.Join("", "Дата: ", message.Date.DateTime);
                 labelTheme.Text = string.Join("", "Тема: ", message.Subject);
                 labelFrom.Text = string.Join("", "От: ", message.From);
-                string _to = "Кому: ";
-                message.To.ToList().ForEach(m => { _to += string.Join(" ", m); });
-                labelTo.Text = _to;
+                string to = "Кому: ";
+                message.To.ToList().ForEach(m => { to += string.Join(" ", m); });
+                labelTo.Text = to;
                 string body;
                 if (message.TextBody == null)
                 {
@@ -222,15 +236,34 @@ namespace E_mail_client
                     body = message.HtmlBody;
                 }
                 webBrowser.DocumentText = body;
+                var ienum = message.Attachments.GetEnumerator();
+                if (message.Attachments.ToList().Count() != 0)
+                {
+                    labelAttachments.Visible = true;
+                }
                 if (((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
                 {
                     ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
-                    _openFolder.SetFlags(e.RowIndex, MessageFlags.Seen, true);
+                    _openFolder.SetFlags(messageUid, MessageFlags.Seen, true);
                     dgvMessages.Rows[e.RowIndex].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
                     dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
                 }
-
             }
+        }
+
+        private void Progress_ProgressChanged(object sender, double e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ProgressBar_VisibleChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DgvMessages_Leave(object sender, EventArgs e)
+        {
+            buttonDeleteMessage.Enabled = false;
         }
     }
 }
