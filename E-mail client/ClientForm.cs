@@ -132,10 +132,8 @@ namespace E_mail_client
 
         private void FormClose(object sender, FormClosingEventArgs e)
         {
+            //_token = new CancellationToken(true);
             //_clientProfile.Client.Disconnect(true);
-            //_source.Cancel();
-            //_token = _source.Token;
-            //Thread.Sleep(2000);
             Application.Exit();
         }
 
@@ -240,11 +238,19 @@ namespace E_mail_client
                     if (summary.Body is BodyPartMultipart multipart)
                     {
                         labelAttachments.Visible = true;
-                        var attachment = multipart.BodyParts.OfType<BodyPartBasic>().FirstOrDefault(x => labelAttachments.Tex.FileName;);
+                        var attachment = multipart.BodyParts.OfType<BodyPartBasic>().FirstOrDefault(x => 
+                        {
+                            if (x.IsAttachment)
+                            {
+                                labelAttachments.Text = x.FileName;
+                                return true;
+                            }
+                            return false;
+                        } );
                         if (attachment != null)
                         {
                             // this will download *just* the attachment
-                            var part = inbox.GetBodyPart(summary.UniqueId, attachment);
+                            var part = _openFolder.GetBodyPart(summary.UniqueId, attachment);
                         }
                     }
 
