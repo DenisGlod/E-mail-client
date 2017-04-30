@@ -132,9 +132,24 @@ namespace E_mail_client
 
         private void FormClose(object sender, FormClosingEventArgs e)
         {
-            //_token = new CancellationToken(true);
-            //_clientProfile.Client.Disconnect(true);
-            Application.Exit();
+            lock (_clientProfile.Client.SyncRoot)
+            {
+                try
+                {
+                    _token = new CancellationToken(true);
+                    if (_clientProfile.Client.IsConnected)
+                    {
+                        _openFolder.Close();
+                        _clientProfile.Client.Disconnect(true);
+                        Console.WriteLine("Disconnect");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+            Application.ExitThread();
         }
 
         private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -165,12 +180,6 @@ namespace E_mail_client
             {
                 treeViewFolder.Enabled = false;
                 picDownload.Visible = true;
-                dgvMessages.Columns.Clear();
-                int idUid = dgvMessages.Columns.Add("uid", "uid");
-                dgvMessages.Columns[idUid].Visible = false;
-                dgvMessages.Columns.Add("theme", "Тема");
-                dgvMessages.Columns.Add("status", "Статус");
-                dgvMessages.Columns[2].Width = 100;
                 foreach (IMailFolder f in _folders)
                 {
                     if (Regex.IsMatch(f.FullName, e.Node.Text))
@@ -181,27 +190,39 @@ namespace E_mail_client
                 }
                 await _openFolder.OpenAsync(FolderAccess.ReadOnly, _token);
                 _uidsListMessages = (await _openFolder.SearchAsync(SearchQuery.All, _token)).ToList();
-                if (_uidsListMessages.Count > 0)
+                try
                 {
-                    var messageListNotSeen = (await _openFolder.SearchAsync(SearchQuery.NotSeen, _token)).ToList();
-                    foreach (UniqueId uid in _uidsListMessages)
+                    if (_uidsListMessages.Count > 0)
                     {
-                        HeaderList headerList = await _openFolder.GetHeadersAsync(uid, _token);
-                        string subject = "";
-                        headerList.ToList().ForEach(h =>
+                        dgvMessages.Columns.Clear();
+                        dgvMessages.Columns[dgvMessages.Columns.Add("uid", "uid")].Visible = false;
+                        dgvMessages.Columns.Add("theme", "Тема");
+                        dgvMessages.Columns.Add("status", "Статус");
+                        dgvMessages.Columns[2].Width = 100;
+                        var messageListNotSeen = (await _openFolder.SearchAsync(SearchQuery.NotSeen, _token)).ToList();
+                        foreach (UniqueId uid in _uidsListMessages)
                         {
-                            if (h.Id == HeaderId.Subject)
+                            HeaderList headerList = await _openFolder.GetHeadersAsync(uid, _token);
+                            string subject = "";
+                            headerList.ToList().ForEach(h =>
                             {
-                                subject = h.Value;
+                                if (h.Id == HeaderId.Subject)
+                                {
+                                    subject = h.Value;
+                                }
+                            });
+                            int indexRow = dgvMessages.Rows.Add(new object[] { uid, subject, messageListNotSeen.Contains(uid) ? "Новое" : "Прочитано" });
+                            if (dgvMessages.Rows[indexRow].Cells[2].Value.Equals("Новое"))
+                            {
+                                dgvMessages.Rows[indexRow].Cells[2].Style.ForeColor = Color.Green;
+                                dgvMessages.Rows[indexRow].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Bold);
                             }
-                        });
-                        int indexRow = dgvMessages.Rows.Add(new object[] { uid, subject, messageListNotSeen.Contains(uid) ? "Новое" : "Прочитано" });
-                        if (dgvMessages.Rows[indexRow].Cells[2].Value.Equals("Новое"))
-                        {
-                            dgvMessages.Rows[indexRow].Cells[2].Style.ForeColor = Color.Green;
-                            dgvMessages.Rows[indexRow].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Bold);
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("\r\n" + ex.StackTrace + "\r\n");
                 }
                 _openFolder.Close();
                 picDownload.Visible = false;
@@ -238,7 +259,7 @@ namespace E_mail_client
                     if (summary.Body is BodyPartMultipart multipart)
                     {
                         labelAttachments.Visible = true;
-                        var attachment = multipart.BodyParts.OfType<BodyPartBasic>().FirstOrDefault(x => 
+                        var attachment = multipart.BodyParts.OfType<BodyPartBasic>().FirstOrDefault(x =>
                         {
                             if (x.IsAttachment)
                             {
@@ -246,14 +267,13 @@ namespace E_mail_client
                                 return true;
                             }
                             return false;
-                        } );
+                        });
                         if (attachment != null)
                         {
                             // this will download *just* the attachment
                             var part = _openFolder.GetBodyPart(summary.UniqueId, attachment);
                         }
                     }
-
                     if (((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
                     {
                         ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
