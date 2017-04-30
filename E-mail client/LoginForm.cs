@@ -133,6 +133,10 @@ namespace E_mail_client
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_clientProfile != null && _clientProfile.Client.IsConnected)
+            {
+                _clientProfile.Client.Disconnect(true);
+            }
             Application.Exit();
         }
     }

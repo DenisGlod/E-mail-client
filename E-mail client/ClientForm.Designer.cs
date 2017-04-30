@@ -45,11 +45,8 @@
             this.lnkSent = new System.Windows.Forms.LinkLabel();
             this.lnkInbox = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.panelDM = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.labelAttachments = new System.Windows.Forms.Label();
+            this.labelAttachments = new System.Windows.Forms.LinkLabel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -70,7 +67,6 @@
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.panelDM.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
@@ -309,7 +305,6 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Controls.Add(this.panelDM);
             this.groupBox3.Controls.Add(this.webBrowser);
             this.groupBox3.Controls.Add(this.labelAttachments);
             this.groupBox3.Controls.Add(this.panel4);
@@ -328,46 +323,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
             // 
-            // panelDM
-            // 
-            this.panelDM.Controls.Add(this.label1);
-            this.panelDM.Controls.Add(this.progressBar);
-            this.panelDM.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDM.Location = new System.Drawing.Point(3, 175);
-            this.panelDM.Name = "panelDM";
-            this.panelDM.Size = new System.Drawing.Size(409, 360);
-            this.panelDM.TabIndex = 18;
-            this.panelDM.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(136, 143);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 17);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Загрузка сообщения";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(62, 163);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(302, 23);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.TabIndex = 17;
-            // 
             // webBrowser
             // 
             this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(3, 175);
+            this.webBrowser.Location = new System.Drawing.Point(3, 178);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(409, 360);
+            this.webBrowser.Size = new System.Drawing.Size(409, 357);
             this.webBrowser.TabIndex = 16;
             // 
             // labelAttachments
@@ -376,13 +340,17 @@
             this.labelAttachments.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelAttachments.Image = ((System.Drawing.Image)(resources.GetObject("labelAttachments.Image")));
             this.labelAttachments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAttachments.LinkColor = System.Drawing.Color.Green;
             this.labelAttachments.Location = new System.Drawing.Point(3, 148);
             this.labelAttachments.Name = "labelAttachments";
-            this.labelAttachments.Size = new System.Drawing.Size(409, 27);
+            this.labelAttachments.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.labelAttachments.Size = new System.Drawing.Size(409, 30);
             this.labelAttachments.TabIndex = 15;
-            this.labelAttachments.Text = "Вложение";
+            this.labelAttachments.TabStop = true;
+            this.labelAttachments.Text = "Скачать вложения";
             this.labelAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelAttachments.Visible = false;
+            this.labelAttachments.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LabelAttachments_LinkClicked);
             // 
             // panel4
             // 
@@ -613,8 +581,6 @@
             this.groupBox1.ResumeLayout(false);
             this.panelFolders.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.panelDM.ResumeLayout(false);
-            this.panelDM.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
@@ -651,7 +617,7 @@
         private System.Windows.Forms.Button buttonDeleteMessage;
         private System.Windows.Forms.Button buttonNewMessage;
         private System.Windows.Forms.DataGridView dgvMessages;
-        private System.Windows.Forms.Label labelAttachments;
+        private System.Windows.Forms.LinkLabel labelAttachments;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
@@ -661,8 +627,5 @@
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.PictureBox picDownload;
-        private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Panel panelDM;
-        private System.Windows.Forms.Label label1;
     }
 }
