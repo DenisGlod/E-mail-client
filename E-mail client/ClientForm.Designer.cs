@@ -45,6 +45,8 @@
             this.lnkSent = new System.Windows.Forms.LinkLabel();
             this.lnkInbox = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panelDM = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.labelAttachments = new System.Windows.Forms.Label();
@@ -68,6 +70,7 @@
             this.groupBox1.SuspendLayout();
             this.panelFolders.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.panelDM.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
@@ -306,7 +309,7 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Controls.Add(this.progressBar);
+            this.groupBox3.Controls.Add(this.panelDM);
             this.groupBox3.Controls.Add(this.webBrowser);
             this.groupBox3.Controls.Add(this.labelAttachments);
             this.groupBox3.Controls.Add(this.panel4);
@@ -318,20 +321,43 @@
             this.groupBox3.Controls.Add(this.labelDate);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.groupBox3.Location = new System.Drawing.Point(745, 40);
+            this.groupBox3.Location = new System.Drawing.Point(832, 40);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(415, 538);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Просмотр";
             // 
+            // panelDM
+            // 
+            this.panelDM.Controls.Add(this.label1);
+            this.panelDM.Controls.Add(this.progressBar);
+            this.panelDM.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDM.Location = new System.Drawing.Point(3, 175);
+            this.panelDM.Name = "panelDM";
+            this.panelDM.Size = new System.Drawing.Size(409, 360);
+            this.panelDM.TabIndex = 18;
+            this.panelDM.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(136, 143);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(145, 17);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Загрузка сообщения";
+            // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(55, 228);
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar.Location = new System.Drawing.Point(62, 163);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(302, 23);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 17;
-            this.progressBar.Visible = false;
             // 
             // webBrowser
             // 
@@ -444,7 +470,7 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(742, 40);
+            this.splitter2.Location = new System.Drawing.Point(829, 40);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 538);
             this.splitter2.TabIndex = 6;
@@ -459,7 +485,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(203, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(539, 538);
+            this.groupBox2.Size = new System.Drawing.Size(626, 538);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Письма";
@@ -472,7 +498,7 @@
             this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
             this.picDownload.Location = new System.Drawing.Point(3, 19);
             this.picDownload.Name = "picDownload";
-            this.picDownload.Size = new System.Drawing.Size(533, 474);
+            this.picDownload.Size = new System.Drawing.Size(620, 474);
             this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picDownload.TabIndex = 4;
             this.picDownload.TabStop = false;
@@ -495,10 +521,9 @@
             this.dgvMessages.RowHeadersVisible = false;
             this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMessages.Size = new System.Drawing.Size(533, 474);
+            this.dgvMessages.Size = new System.Drawing.Size(620, 474);
             this.dgvMessages.TabIndex = 3;
             this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellContentClick);
-            this.dgvMessages.Leave += new System.EventHandler(this.DgvMessages_Leave);
             // 
             // panelButton
             // 
@@ -508,7 +533,7 @@
             this.panelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panelButton.Location = new System.Drawing.Point(3, 493);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(533, 42);
+            this.panelButton.Size = new System.Drawing.Size(620, 42);
             this.panelButton.TabIndex = 2;
             // 
             // buttonDeleteMessage
@@ -517,7 +542,7 @@
             this.buttonDeleteMessage.Enabled = false;
             this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
             this.buttonDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDeleteMessage.Location = new System.Drawing.Point(302, 8);
+            this.buttonDeleteMessage.Location = new System.Drawing.Point(346, 8);
             this.buttonDeleteMessage.Name = "buttonDeleteMessage";
             this.buttonDeleteMessage.Size = new System.Drawing.Size(135, 29);
             this.buttonDeleteMessage.TabIndex = 1;
@@ -530,7 +555,7 @@
             this.buttonNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonNewMessage.Image = global::E_mail_client.Properties.Resources.new_message;
             this.buttonNewMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewMessage.Location = new System.Drawing.Point(88, 7);
+            this.buttonNewMessage.Location = new System.Drawing.Point(132, 7);
             this.buttonNewMessage.Name = "buttonNewMessage";
             this.buttonNewMessage.Size = new System.Drawing.Size(175, 29);
             this.buttonNewMessage.TabIndex = 0;
@@ -551,7 +576,7 @@
             this.tableLayoutPanelNameEmail.RowCount = 1;
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(1160, 40);
+            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(1247, 40);
             this.tableLayoutPanelNameEmail.TabIndex = 0;
             // 
             // labelNameEmail
@@ -564,7 +589,7 @@
             this.labelNameEmail.Location = new System.Drawing.Point(3, 3);
             this.labelNameEmail.Margin = new System.Windows.Forms.Padding(3);
             this.labelNameEmail.Name = "labelNameEmail";
-            this.labelNameEmail.Size = new System.Drawing.Size(1154, 34);
+            this.labelNameEmail.Size = new System.Drawing.Size(1241, 34);
             this.labelNameEmail.TabIndex = 0;
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -573,7 +598,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 578);
+            this.ClientSize = new System.Drawing.Size(1247, 578);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -588,6 +613,8 @@
             this.groupBox1.ResumeLayout(false);
             this.panelFolders.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.panelDM.ResumeLayout(false);
+            this.panelDM.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
@@ -635,5 +662,7 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.PictureBox picDownload;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Panel panelDM;
+        private System.Windows.Forms.Label label1;
     }
 }

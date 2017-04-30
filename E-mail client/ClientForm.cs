@@ -14,10 +14,14 @@ namespace E_mail_client
     public partial class ClientForm : Form
     {
         private ClientProfile _clientProfile;
-        private Dictionary<LinkLabel, TreeNode> _key;
+        private Dictionary<LinkLabel, TreeNode> _key = new Dictionary<LinkLabel, TreeNode>();
         private IMailFolder _openFolder;
         private IList<IMailFolder> _folders;
-        private TransferProgress _tProgress;
+        private TransferProgress _tProgress = new TransferProgress();
+
+        private CancellationToken _token = new CancellationToken(false);
+
+        private IList<UniqueId> _uidsListMessages;
 
         public ClientForm(ClientProfile clientProfile)
         {
@@ -25,15 +29,13 @@ namespace E_mail_client
             panelFolders.Height = 0;
             _clientProfile = clientProfile;
             labelNameEmail.Text = _clientProfile.Email;
-            _key = new Dictionary<LinkLabel, TreeNode>();
             InitFolders();
-            _tProgress = new TransferProgress();
-            _tProgress.ProgressChanged += (s, percent) => { BeginInvoke((MethodInvoker)(() => { progressBar.Value = percent; Console.WriteLine(percent); })); };
+            _tProgress.ProgressChanged += (s, percent) => { BeginInvoke((MethodInvoker)(() => progressBar.Value = (int)percent)); };
         }
 
         private async void InitFolders()
         {
-            _folders = await _clientProfile.Client.GetFoldersAsync(_clientProfile.Client.PersonalNamespaces.First());
+            _folders = await _clientProfile.Client.GetFoldersAsync(_clientProfile.Client.PersonalNamespaces.First(), false, _token);
             _folders.ToList().ForEach(f =>
             {
                 if (!f.ParentFolder.Name.Equals(""))
@@ -130,7 +132,10 @@ namespace E_mail_client
 
         private void FormClose(object sender, FormClosingEventArgs e)
         {
-            _clientProfile.Client.Disconnect(true);
+            //_clientProfile.Client.Disconnect(true);
+            //_source.Cancel();
+            //_token = _source.Token;
+            //Thread.Sleep(2000);
             Application.Exit();
         }
 
@@ -158,7 +163,7 @@ namespace E_mail_client
             {
                 _clientProfile.Reconnect();
             }
-            if (!Regex.Match(treeViewFolder.SelectedNode.Text, @"\[.*\]").Success)
+            if (!Regex.Match(treeViewFolder.SelectedNode.Text, @"\[.*\]").Success && !_token.CanBeCanceled)
             {
                 treeViewFolder.Enabled = false;
                 picDownload.Visible = true;
@@ -176,16 +181,16 @@ namespace E_mail_client
                         break;
                     }
                 }
-                await _openFolder.OpenAsync(FolderAccess.ReadOnly);
-                IList<UniqueId> _uidsListMessages = (await _openFolder.SearchAsync(SearchQuery.All)).ToList();
+                await _openFolder.OpenAsync(FolderAccess.ReadOnly, _token);
+                _uidsListMessages = (await _openFolder.SearchAsync(SearchQuery.All, _token)).ToList();
                 if (_uidsListMessages.Count > 0)
                 {
-                    var messageListNotSeen = (await _openFolder.SearchAsync(SearchQuery.NotSeen)).ToList();
+                    var messageListNotSeen = (await _openFolder.SearchAsync(SearchQuery.NotSeen, _token)).ToList();
                     foreach (UniqueId uid in _uidsListMessages)
                     {
-                        HeaderList headerMessage = await _openFolder.GetHeadersAsync(uid);
+                        HeaderList headerList = await _openFolder.GetHeadersAsync(uid, _token);
                         string subject = "";
-                        headerMessage.ToList().ForEach(h =>
+                        headerList.ToList().ForEach(h =>
                         {
                             if (h.Id == HeaderId.Subject)
                             {
@@ -208,64 +213,90 @@ namespace E_mail_client
 
         private async void DgvMessages_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            buttonDeleteMessage.Enabled = true;
+            groupBox1.Enabled = false;
+            groupBox2.Enabled = false;
             labelAttachments.Visible = false;
-            progressBar.Visible = true;
             progressBar.Value = 0;
+            panelDM.Visible = true;
             if (e.RowIndex > -1)
             {
-                await _openFolder.OpenAsync(FolderAccess.ReadWrite);
+                await _openFolder.OpenAsync(FolderAccess.ReadWrite, _token);
                 var messageUid = UniqueId.Parse(((DataGridView)sender).CurrentRow.Cells[0].Value.ToString());
-                var message = await _openFolder.GetMessageAsync(messageUid, new CancellationToken(), _tProgress);
-                labelDate.Text = string.Join("", "Дата: ", message.Date.DateTime);
-                labelTheme.Text = string.Join("", "Тема: ", message.Subject);
-                labelFrom.Text = string.Join("", "От: ", message.From);
-                string to = "Кому: ";
-                message.To.ToList().ForEach(m => { to += string.Join(" ", m); });
-                labelTo.Text = to;
-                string body;
-                if (message.TextBody == null)
+
+                foreach (var summary in _openFolder.Fetch(_uidsListMessages, MessageSummaryItems.UniqueId | MessageSummaryItems.Body | MessageSummaryItems.All))
                 {
-                    body = message.HtmlBody;
+                    labelDate.Text = string.Join("", "Дата: ", summary.Date.DateTime);
+                    labelTheme.Text = string.Join("", "Тема: ", summary.Envelope.Subject);
+                    labelFrom.Text = string.Join("", "От: ", summary.Envelope.From);
+
+                    //Console.WriteLine("UID " + summary.UniqueId);
+                    //Console.WriteLine("Body " + summary.Body);
+                    //Console.WriteLine("Attachments count " + summary.Attachments.Count());
+                    //Console.WriteLine("Subject " + summary.Envelope.Subject);
+                    //Console.WriteLine("From " + summary.Envelope.From);
+                    //Console.WriteLine("To " + summary.Envelope.To);
+                    //Console.WriteLine("Date " + summary.Date.DateTime);
+
+                    if (summary.Body is BodyPartMultipart multipart)
+                    {
+                        labelAttachments.Visible = true;
+                        var attachment = multipart.BodyParts.OfType<BodyPartBasic>().FirstOrDefault(x => labelAttachments.Tex.FileName;);
+                        if (attachment != null)
+                        {
+                            // this will download *just* the attachment
+                            var part = inbox.GetBodyPart(summary.UniqueId, attachment);
+                        }
+                    }
+
+                    if (((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
+                    {
+                        ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
+                        _openFolder.SetFlags(messageUid, MessageFlags.Seen, true);
+                        dgvMessages.Rows[e.RowIndex].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
+                        dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
+                    }
                 }
-                else if (message.HtmlBody == null)
-                {
-                    body = message.TextBody.Replace("\r\n", "<br>");
-                }
-                else
-                {
-                    body = message.HtmlBody;
-                }
-                webBrowser.DocumentText = body;
-                var ienum = message.Attachments.GetEnumerator();
-                if (message.Attachments.ToList().Count() != 0)
-                {
-                    labelAttachments.Visible = true;
-                }
-                if (((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
-                {
-                    ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
-                    _openFolder.SetFlags(messageUid, MessageFlags.Seen, true);
-                    dgvMessages.Rows[e.RowIndex].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
-                    dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
-                }
+
+                // var message = await _openFolder.GetBodyPartAsync(messageUid, , _tProgress);
+
+
+
+                //labelDate.Text = string.Join("", "Дата: ", message.Date.DateTime);
+                //labelTheme.Text = string.Join("", "Тема: ", message.Subject);
+                //labelFrom.Text = string.Join("", "От: ", message.From);
+                //string to = "Кому: ";
+                //message.To.ToList().ForEach(m => { to += string.Join(" ", m); });
+                //labelTo.Text = to;
+                //string body;
+                //if (message.TextBody == null)
+                //{
+                //    body = message.HtmlBody;
+                //}
+                //else if (message.HtmlBody == null)
+                //{
+                //    body = message.TextBody.Replace("\r\n", "<br>");
+                //}
+                //else
+                //{
+                //    body = message.HtmlBody;
+                //}
+                //webBrowser.DocumentText = body;
+                //var ienum = message.Attachments.GetEnumerator();
+                //if (message.Attachments.ToList().Count() != 0)
+                //{
+                //    labelAttachments.Visible = true;
+                //}
+                //if (((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
+                //{
+                //    ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
+                //    _openFolder.SetFlags(messageUid, MessageFlags.Seen, true);
+                //    dgvMessages.Rows[e.RowIndex].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
+                //    dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
+                //}
             }
-            //progressBar.Visible = false;
-        }
-
-        private void Progress_ProgressChanged(object sender, double e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ProgressBar_VisibleChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DgvMessages_Leave(object sender, EventArgs e)
-        {
-            buttonDeleteMessage.Enabled = false;
+            panelDM.Visible = false;
+            groupBox1.Enabled = true;
+            groupBox2.Enabled = true;
         }
     }
 }

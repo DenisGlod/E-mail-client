@@ -9,11 +9,11 @@ namespace E_mail_client
         private long _bytesTransferred;
         private long _totalSize;
 
-        public event EventHandler<int> ProgressChanged;
+        public event EventHandler<double> ProgressChanged;
 
-        public int Percents
+        public double Percents
         {
-            get { return (int)(_bytesTransferred / _totalSize * 100); }
+            get { return (double)_bytesTransferred / _totalSize * 100d; }
         }
 
         void ITransferProgress.Report(long bytesTransferred, long totalSize)

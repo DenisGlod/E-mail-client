@@ -131,12 +131,8 @@ namespace E_mail_client
             textBoxPassword.UseSystemPasswordChar = true;
         }
 
-        private void StartForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_clientProfile != null)
-            {
-                _clientProfile.Client.Disconnect(true);
-            }
             Application.Exit();
         }
     }
