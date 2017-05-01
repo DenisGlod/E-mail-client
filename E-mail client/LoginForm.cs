@@ -15,6 +15,7 @@ namespace E_mail_client
         private const string GmailHost = "imap.gmail.com";
         private const string OutlookHost = "imap-mail.outlook.com";
         private const string YandexHost = "imap.yandex.ru";
+        private const string MailRuHost = "imap.mail.ru";
         private const int PortImap = 993;
 
         private ClientProfile _clientProfile;
@@ -51,16 +52,19 @@ namespace E_mail_client
                     case 2:
                         Conect(YandexHost, email, password);
                         break;
+                    case 3:
+                        Conect(MailRuHost, email, password);
+                        break;
                 }
             }
         }
-        private void Conect(string host, string email, string password)
+        private async void Conect(string host, string email, string password)
         {
             try
             {
                 ImapClient imapClient = new ImapClient();
-                imapClient.Connect(host, PortImap, SecureSocketOptions.SslOnConnect);
-                imapClient.Authenticate(email, password);
+                await imapClient.ConnectAsync(host, PortImap, SecureSocketOptions.SslOnConnect);
+                await imapClient.AuthenticateAsync(email, password);
                 _clientProfile = new ClientProfile(imapClient, email, password, host, PortImap);
                 Message(SuccessConnect, false);
             }

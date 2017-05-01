@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbMenu = new System.Windows.Forms.GroupBox();
             this.treeViewFolder = new System.Windows.Forms.TreeView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -44,7 +44,7 @@
             this.lnkDrafts = new System.Windows.Forms.LinkLabel();
             this.lnkSent = new System.Windows.Forms.LinkLabel();
             this.lnkInbox = new System.Windows.Forms.LinkLabel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbViewMessages = new System.Windows.Forms.GroupBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.labelAttachments = new System.Windows.Forms.LinkLabel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -56,7 +56,7 @@
             this.labelDate = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbMessagesAndButton = new System.Windows.Forms.GroupBox();
             this.picDownload = new System.Windows.Forms.PictureBox();
             this.dgvMessages = new System.Windows.Forms.DataGridView();
             this.panelButton = new System.Windows.Forms.Panel();
@@ -64,45 +64,47 @@
             this.buttonNewMessage = new System.Windows.Forms.Button();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.gbMenu.SuspendLayout();
             this.panelFolders.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbViewMessages.SuspendLayout();
+            this.gbMessagesAndButton.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).BeginInit();
             this.panelButton.SuspendLayout();
             this.tableLayoutPanelNameEmail.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gbMenu
             // 
-            this.groupBox1.Controls.Add(this.treeViewFolder);
-            this.groupBox1.Controls.Add(this.panel3);
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Controls.Add(this.panel2);
-            this.groupBox1.Controls.Add(this.panelFolders);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 40);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 538);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Папки";
+            this.gbMenu.Controls.Add(this.treeViewFolder);
+            this.gbMenu.Controls.Add(this.panel3);
+            this.gbMenu.Controls.Add(this.panel1);
+            this.gbMenu.Controls.Add(this.panel2);
+            this.gbMenu.Controls.Add(this.panelFolders);
+            this.gbMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gbMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gbMenu.Location = new System.Drawing.Point(0, 40);
+            this.gbMenu.Name = "gbMenu";
+            this.gbMenu.Size = new System.Drawing.Size(200, 538);
+            this.gbMenu.TabIndex = 2;
+            this.gbMenu.TabStop = false;
+            this.gbMenu.Text = "Папки";
             // 
             // treeViewFolder
             // 
-            this.treeViewFolder.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.treeViewFolder.BackColor = System.Drawing.SystemColors.Control;
             this.treeViewFolder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeViewFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewFolder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.treeViewFolder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeViewFolder.FullRowSelect = true;
-            this.treeViewFolder.HideSelection = false;
+            this.treeViewFolder.ItemHeight = 18;
             this.treeViewFolder.Location = new System.Drawing.Point(3, 293);
             this.treeViewFolder.Name = "treeViewFolder";
             this.treeViewFolder.Size = new System.Drawing.Size(194, 242);
             this.treeViewFolder.TabIndex = 9;
+            this.treeViewFolder.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewFolder_BeforeSelect);
             this.treeViewFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewFolder_AfterSelect);
+            this.treeViewFolder.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewFolder_NodeMouseClick);
             // 
             // panel3
             // 
@@ -302,36 +304,36 @@
             this.lnkInbox.Visible = false;
             this.lnkInbox.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkClicked);
             // 
-            // groupBox3
+            // gbViewMessages
             // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Controls.Add(this.webBrowser);
-            this.groupBox3.Controls.Add(this.labelAttachments);
-            this.groupBox3.Controls.Add(this.panel4);
-            this.groupBox3.Controls.Add(this.panel5);
-            this.groupBox3.Controls.Add(this.panel6);
-            this.groupBox3.Controls.Add(this.labelTo);
-            this.groupBox3.Controls.Add(this.labelFrom);
-            this.groupBox3.Controls.Add(this.labelTheme);
-            this.groupBox3.Controls.Add(this.labelDate);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.groupBox3.Location = new System.Drawing.Point(832, 40);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(415, 538);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Просмотр";
+            this.gbViewMessages.BackColor = System.Drawing.SystemColors.Control;
+            this.gbViewMessages.Controls.Add(this.webBrowser);
+            this.gbViewMessages.Controls.Add(this.labelAttachments);
+            this.gbViewMessages.Controls.Add(this.panel4);
+            this.gbViewMessages.Controls.Add(this.panel5);
+            this.gbViewMessages.Controls.Add(this.panel6);
+            this.gbViewMessages.Controls.Add(this.labelTo);
+            this.gbViewMessages.Controls.Add(this.labelFrom);
+            this.gbViewMessages.Controls.Add(this.labelTheme);
+            this.gbViewMessages.Controls.Add(this.labelDate);
+            this.gbViewMessages.Dock = System.Windows.Forms.DockStyle.Right;
+            this.gbViewMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.gbViewMessages.Location = new System.Drawing.Point(762, 40);
+            this.gbViewMessages.Name = "gbViewMessages";
+            this.gbViewMessages.Size = new System.Drawing.Size(485, 538);
+            this.gbViewMessages.TabIndex = 4;
+            this.gbViewMessages.TabStop = false;
+            this.gbViewMessages.Text = "Просмотр";
             // 
             // webBrowser
             // 
             this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.webBrowser.Location = new System.Drawing.Point(3, 178);
+            this.webBrowser.Location = new System.Drawing.Point(3, 148);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(409, 357);
+            this.webBrowser.Size = new System.Drawing.Size(479, 387);
             this.webBrowser.TabIndex = 16;
             // 
             // labelAttachments
@@ -343,12 +345,12 @@
             this.labelAttachments.LinkColor = System.Drawing.Color.Green;
             this.labelAttachments.Location = new System.Drawing.Point(3, 148);
             this.labelAttachments.Name = "labelAttachments";
-            this.labelAttachments.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.labelAttachments.Size = new System.Drawing.Size(409, 30);
+            this.labelAttachments.Padding = new System.Windows.Forms.Padding(30, 0, 0, 5);
+            this.labelAttachments.Size = new System.Drawing.Size(479, 0);
             this.labelAttachments.TabIndex = 15;
             this.labelAttachments.TabStop = true;
             this.labelAttachments.Text = "Скачать вложения";
-            this.labelAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelAttachments.Visible = false;
             this.labelAttachments.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LabelAttachments_LinkClicked);
             // 
@@ -358,7 +360,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 138);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(409, 10);
+            this.panel4.Size = new System.Drawing.Size(479, 10);
             this.panel4.TabIndex = 14;
             // 
             // panel5
@@ -367,7 +369,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 137);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(409, 1);
+            this.panel5.Size = new System.Drawing.Size(479, 1);
             this.panel5.TabIndex = 12;
             // 
             // panel6
@@ -376,7 +378,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 127);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(409, 10);
+            this.panel6.Size = new System.Drawing.Size(479, 10);
             this.panel6.TabIndex = 13;
             // 
             // labelTo
@@ -386,7 +388,7 @@
             this.labelTo.Location = new System.Drawing.Point(3, 100);
             this.labelTo.Name = "labelTo";
             this.labelTo.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTo.Size = new System.Drawing.Size(409, 27);
+            this.labelTo.Size = new System.Drawing.Size(479, 27);
             this.labelTo.TabIndex = 3;
             this.labelTo.Text = "Кому: ";
             this.labelTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -398,7 +400,7 @@
             this.labelFrom.Location = new System.Drawing.Point(3, 73);
             this.labelFrom.Name = "labelFrom";
             this.labelFrom.Padding = new System.Windows.Forms.Padding(5);
-            this.labelFrom.Size = new System.Drawing.Size(409, 27);
+            this.labelFrom.Size = new System.Drawing.Size(479, 27);
             this.labelFrom.TabIndex = 2;
             this.labelFrom.Text = "От: ";
             this.labelFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -410,7 +412,7 @@
             this.labelTheme.Location = new System.Drawing.Point(3, 46);
             this.labelTheme.Name = "labelTheme";
             this.labelTheme.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTheme.Size = new System.Drawing.Size(409, 27);
+            this.labelTheme.Size = new System.Drawing.Size(479, 27);
             this.labelTheme.TabIndex = 1;
             this.labelTheme.Text = "Тема: ";
             this.labelTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -422,7 +424,7 @@
             this.labelDate.Location = new System.Drawing.Point(3, 19);
             this.labelDate.Name = "labelDate";
             this.labelDate.Padding = new System.Windows.Forms.Padding(5);
-            this.labelDate.Size = new System.Drawing.Size(409, 27);
+            this.labelDate.Size = new System.Drawing.Size(479, 27);
             this.labelDate.TabIndex = 0;
             this.labelDate.Text = "Дата: ";
             this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -438,35 +440,36 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(829, 40);
+            this.splitter2.Location = new System.Drawing.Point(759, 40);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 538);
             this.splitter2.TabIndex = 6;
             this.splitter2.TabStop = false;
             // 
-            // groupBox2
+            // gbMessagesAndButton
             // 
-            this.groupBox2.Controls.Add(this.picDownload);
-            this.groupBox2.Controls.Add(this.dgvMessages);
-            this.groupBox2.Controls.Add(this.panelButton);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(203, 40);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(626, 538);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Письма";
+            this.gbMessagesAndButton.Controls.Add(this.picDownload);
+            this.gbMessagesAndButton.Controls.Add(this.dgvMessages);
+            this.gbMessagesAndButton.Controls.Add(this.panelButton);
+            this.gbMessagesAndButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbMessagesAndButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gbMessagesAndButton.Location = new System.Drawing.Point(203, 40);
+            this.gbMessagesAndButton.Name = "gbMessagesAndButton";
+            this.gbMessagesAndButton.Size = new System.Drawing.Size(556, 538);
+            this.gbMessagesAndButton.TabIndex = 7;
+            this.gbMessagesAndButton.TabStop = false;
+            this.gbMessagesAndButton.Text = "Письма";
             // 
             // picDownload
             // 
             this.picDownload.BackColor = System.Drawing.Color.White;
             this.picDownload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picDownload.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picDownload.ErrorImage = null;
             this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
             this.picDownload.Location = new System.Drawing.Point(3, 19);
             this.picDownload.Name = "picDownload";
-            this.picDownload.Size = new System.Drawing.Size(620, 474);
+            this.picDownload.Size = new System.Drawing.Size(550, 474);
             this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picDownload.TabIndex = 4;
             this.picDownload.TabStop = false;
@@ -489,9 +492,9 @@
             this.dgvMessages.RowHeadersVisible = false;
             this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMessages.Size = new System.Drawing.Size(620, 474);
+            this.dgvMessages.Size = new System.Drawing.Size(550, 474);
             this.dgvMessages.TabIndex = 3;
-            this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellContentClick);
+            this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellClick);
             // 
             // panelButton
             // 
@@ -501,31 +504,32 @@
             this.panelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panelButton.Location = new System.Drawing.Point(3, 493);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(620, 42);
+            this.panelButton.Size = new System.Drawing.Size(550, 42);
             this.panelButton.TabIndex = 2;
             // 
             // buttonDeleteMessage
             // 
             this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonDeleteMessage.Enabled = false;
+            this.buttonDeleteMessage.AutoSize = true;
             this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
             this.buttonDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDeleteMessage.Location = new System.Drawing.Point(346, 8);
+            this.buttonDeleteMessage.Location = new System.Drawing.Point(316, 7);
             this.buttonDeleteMessage.Name = "buttonDeleteMessage";
             this.buttonDeleteMessage.Size = new System.Drawing.Size(135, 29);
             this.buttonDeleteMessage.TabIndex = 1;
             this.buttonDeleteMessage.Text = "Удалить сообщение";
             this.buttonDeleteMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonDeleteMessage.UseVisualStyleBackColor = true;
+            this.buttonDeleteMessage.Click += new System.EventHandler(this.ButtonDeleteMessage_Click);
             // 
             // buttonNewMessage
             // 
             this.buttonNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonNewMessage.Image = global::E_mail_client.Properties.Resources.new_message;
             this.buttonNewMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewMessage.Location = new System.Drawing.Point(132, 7);
+            this.buttonNewMessage.Location = new System.Drawing.Point(83, 7);
             this.buttonNewMessage.Name = "buttonNewMessage";
-            this.buttonNewMessage.Size = new System.Drawing.Size(175, 29);
+            this.buttonNewMessage.Size = new System.Drawing.Size(179, 29);
             this.buttonNewMessage.TabIndex = 0;
             this.buttonNewMessage.Text = "Написать новое сообщение";
             this.buttonNewMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -567,24 +571,25 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 578);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gbMessagesAndButton);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbViewMessages);
+            this.Controls.Add(this.gbMenu);
             this.Controls.Add(this.tableLayoutPanelNameEmail);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-mail Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClose);
-            this.groupBox1.ResumeLayout(false);
+            this.gbMenu.ResumeLayout(false);
             this.panelFolders.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.gbViewMessages.ResumeLayout(false);
+            this.gbMessagesAndButton.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.panelButton.ResumeLayout(false);
+            this.panelButton.PerformLayout();
             this.tableLayoutPanelNameEmail.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.PerformLayout();
             this.ResumeLayout(false);
@@ -592,11 +597,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbMenu;
+        private System.Windows.Forms.GroupBox gbViewMessages;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbMessagesAndButton;
         private System.Windows.Forms.Panel panelFolders;
         private System.Windows.Forms.LinkLabel lnkArchive;
         private System.Windows.Forms.LinkLabel lnkAll;

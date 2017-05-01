@@ -1,8 +1,10 @@
 ﻿using MailKit;
+using MailKit.Net.Imap;
 using MailKit.Search;
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -24,6 +26,8 @@ namespace E_mail_client
         private IList<IMessageSummary> _listMessageSummary;
         private IMessageSummary _attachments;
         private string _directory;
+        private ComponentResourceManager resources = new ComponentResourceManager(typeof(ClientForm));
+        private const string _cellStatus = "status";
 
         public ClientForm(ClientProfile clientProfile)
         {
@@ -53,16 +57,16 @@ namespace E_mail_client
                     var i = treeViewFolder.Nodes.GetEnumerator();
                     while (i.MoveNext())
                     {
-                        if (((TreeNode)i.Current).Text.Equals(f.ParentFolder.Name))
+                        if (((TreeNode)i.Current).Text.Trim().Equals(f.ParentFolder.Name))
                         {
-                            TreeNode node = ((TreeNode)i.Current).Nodes.Add(f.Name);
+                            TreeNode node = ((TreeNode)i.Current).Nodes.Add(f.Name + "    ");
                             VisibleLinkLable(f, node);
                         }
                     }
                 }
                 else
                 {
-                    TreeNode node = treeViewFolder.Nodes.Add(f.Name);
+                    TreeNode node = treeViewFolder.Nodes.Add(f.Name + "    ");
                     VisibleLinkLable(f, node);
                 }
             });
@@ -70,7 +74,6 @@ namespace E_mail_client
 
         private void VisibleLinkLable(IMailFolder folder, TreeNode node)
         {
-            //Console.WriteLine(folder.Attributes.GetHashCode() + " | " + folder.Attributes.ToString() + ", " + folder.Name);
             if (folder.Attributes.HasFlag(FolderAttributes.NonExistent))
             {
                 return;
@@ -153,42 +156,49 @@ namespace E_mail_client
             Application.Exit();
         }
 
+        #region Событие LinkClicked которое происходит по нажатию на все LinkLabel
         private void LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            lnkAll.Font =
-               lnkArchive.Font =
-                   lnkDrafts.Font =
-                       lnkFlagged.Font =
-                           lnkImportant.Font =
-                               lnkInbox.Font =
-                                   lnkJunk.Font =
-                                       lnkSent.Font =
-                                           lnkTrash.Font = new Font(lnkTrash.Font, FontStyle.Regular);
+            LinkDefaultFont();
             LinkLabel link = (LinkLabel)sender;
             _key.TryGetValue(link, out TreeNode node);
             treeViewFolder.SelectedNode = node;
-            treeViewFolder.Focus();
             link.Font = new Font(link.Font, FontStyle.Bold);
+        }
+        #endregion
+
+        private void TreeViewFolder_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (treeViewFolder.SelectedNode != null)
+            {
+                treeViewFolder.SelectedNode.NodeFont = new Font(treeViewFolder.Font, FontStyle.Regular);
+            }
         }
 
         private async void TreeViewFolder_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            ClietnReconnect();
+            ViewMessageClear();
+            LinkLock();
+            treeViewFolder.SelectedNode.NodeFont = new Font(treeViewFolder.Font, FontStyle.Bold);
             dgvMessages.Columns.Clear();
             dgvMessages.Columns[dgvMessages.Columns.Add("uid", "uid")].Visible = false;
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn()
+            {
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 30
+            };
+            dgvMessages.Columns.Add(imageColumn);
             dgvMessages.Columns.Add("theme", "Тема");
             dgvMessages.Columns.Add("status", "Статус");
-            dgvMessages.Columns[2].Width = 100;
-            if (!_clientProfile.Client.IsConnected || !_clientProfile.Client.IsAuthenticated)
-            {
-                _clientProfile.Reconnect();
-            }
+            dgvMessages.Columns[3].Width = 100;
             if (!Regex.Match(treeViewFolder.SelectedNode.Text, @"\[.*\]").Success && !_token.CanBeCanceled)
             {
                 treeViewFolder.Enabled = false;
                 picDownload.Visible = true;
                 foreach (IMailFolder f in _folders)
                 {
-                    if (Regex.IsMatch(f.FullName, e.Node.Text))
+                    if (Regex.IsMatch(f.FullName, e.Node.Text.Trim()))
                     {
                         _openFolder = f;
                         break;
@@ -206,25 +216,35 @@ namespace E_mail_client
                         string subject = summary.Envelope.Subject;
                         UniqueId uid = summary.UniqueId;
 
-                        int indexRow = !_token.IsCancellationRequested ? dgvMessages.Rows.Add(new object[] { uid, subject, messageListNotSeen.Contains(uid) ? "Новое" : "Прочитано" }) : 0;
-                        if (!_token.IsCancellationRequested && dgvMessages.Rows[indexRow].Cells[2].Value.Equals("Новое"))
+                        int indexRow = !_token.IsCancellationRequested ? dgvMessages.Rows.Add(new object[] {
+                            uid,
+                            summary.Attachments.Count() > 0 ? Properties.Resources.attach : Properties.Resources.white,
+                            subject,
+                            messageListNotSeen.Contains(uid) ? "Новое" : "Прочитано"
+                        }) : 0;
+                        if (!_token.IsCancellationRequested && dgvMessages.Rows[indexRow].Cells[_cellStatus].Value.Equals("Новое"))
                         {
-                            dgvMessages.Rows[indexRow].Cells[2].Style.ForeColor = Color.Green;
-                            dgvMessages.Rows[indexRow].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Bold);
+                            dgvMessages.Rows[indexRow].Cells[_cellStatus].Style.ForeColor = Color.Green;
+                            dgvMessages.Rows[indexRow].Cells[_cellStatus].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Bold);
                         }
                     }
                 }
                 if (!_token.IsCancellationRequested) _openFolder.Close();
                 picDownload.Visible = false;
                 treeViewFolder.Enabled = true;
+                LinkActive();
             }
         }
 
-        private async void DgvMessages_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void DgvMessages_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            groupBox1.Enabled = false;
-            groupBox2.Enabled = false;
+            ClietnReconnect();
+            treeViewFolder.Enabled = false;
+            dgvMessages.Enabled = false;
+            panelButton.Enabled = false;
+            LinkLock();
             labelAttachments.Visible = false;
+            labelAttachments.Text = "Скачать вложения";
             if (e.RowIndex > -1)
             {
                 await _openFolder.OpenAsync(FolderAccess.ReadWrite, _token);
@@ -241,8 +261,8 @@ namespace E_mail_client
                         labelDate.Text = string.Join("", "Дата: ", summary.Date.DateTime);
                         labelTheme.Text = string.Join("", "Тема: ", summary.Envelope.Subject);
                         labelFrom.Text = string.Join("", "От: ", summary.Envelope.From);
-                        labelTo.Text = string.Join("", "От: ", summary.Envelope.To);
-                        if (summary.HtmlBody.IsHtml)
+                        labelTo.Text = string.Join("", "Кому: ", summary.Envelope.To);
+                        if (summary.HtmlBody != null && summary.HtmlBody.IsHtml)
                         {
                             var body = (TextPart)await _openFolder.GetBodyPartAsync(messageUid, summary.HtmlBody, _token);
                             webBrowser.DocumentText = body.Text;
@@ -250,27 +270,28 @@ namespace E_mail_client
                         else
                         {
                             var body = (TextPart)await _openFolder.GetBodyPartAsync(messageUid, summary.TextBody, _token);
-                            webBrowser.DocumentText = body.Text;
+                            webBrowser.DocumentText = body.Text.Replace("\r\n", "<br>");
                         }
                         if (summary.Attachments.Count() > 0)
                         {
-                            var str = summary.Body.ContentType;
                             labelAttachments.Visible = true;
+                            labelAttachments.Height = 30;
                             _attachments = summary;
                         }
-                        if (((DataGridView)sender).CurrentRow != null && ((DataGridView)sender).CurrentRow.Cells[2].Value.ToString().Equals("Новое"))
+                        if (((DataGridView)sender).CurrentRow != null && ((DataGridView)sender).CurrentRow.Cells[_cellStatus].Value.ToString().Equals("Новое"))
                         {
-                            ((DataGridView)sender).CurrentRow.Cells[2].Value = "Прочитано";
+                            ((DataGridView)sender).CurrentRow.Cells[_cellStatus].Value = "Прочитано";
                             _openFolder.SetFlags(messageUid, MessageFlags.Seen, true);
-                            dgvMessages.Rows[e.RowIndex].Cells[2].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
-                            dgvMessages.Rows[e.RowIndex].Cells[2].Style.ForeColor = Color.Black;
+                            dgvMessages.Rows[e.RowIndex].Cells[_cellStatus].Style.Font = new Font(dgvMessages.RowTemplate.DefaultCellStyle.Font, FontStyle.Regular);
+                            dgvMessages.Rows[e.RowIndex].Cells[_cellStatus].Style.ForeColor = Color.Black;
                         }
                     }
                 }
             }
-            groupBox1.Enabled = true;
-            groupBox2.Enabled = true;
-
+            LinkActive();
+            panelButton.Enabled = true;
+            dgvMessages.Enabled = true;
+            treeViewFolder.Enabled = true;
         }
 
         private void LabelAttachments_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -288,6 +309,70 @@ namespace E_mail_client
             {
                 Process.Start(_directory + "\\" + _attachments.UniqueId.ToString());
             }
+        }
+
+        private void TreeViewFolder_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            LinkDefaultFont();
+            _key.ToList().ForEach((k) =>
+            {
+                if (k.Value == e.Node)
+                {
+                    k.Key.Font = new Font(lnkAll.Font, FontStyle.Bold);
+                    return;
+                }
+
+            });
+        }
+
+        private async void ButtonDeleteMessage_Click(object sender, EventArgs e)
+        {
+            if (!_openFolder.Attributes.HasFlag(FolderAttributes.Trash))
+            {
+                if (dgvMessages.SelectedRows.Count > 0)
+                {
+                    var result = MessageBox.Show("Вы точно хотите переместить сообщение в козину?", "Удаление сообщение", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (result == DialogResult.OK)
+                    {
+                        var cells = dgvMessages.SelectedCells.GetEnumerator();
+                        cells.MoveNext();
+                        var uid = (UniqueId)((DataGridViewTextBoxCell)cells.Current).Value;
+                        await _openFolder.OpenAsync(FolderAccess.ReadWrite, _token);
+                        IMailFolder trash = null;
+                        _folders.ToList().ForEach(folder =>
+                        {
+                            if (folder.Attributes.HasFlag(FolderAttributes.Trash))
+                            {
+                                trash = folder;
+                            }
+                        });
+                        await _openFolder.MoveToAsync(uid, trash, _token);
+                        dgvMessages.Rows.Remove(dgvMessages.CurrentRow);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка! Не выбрано сообщение для перемещения в корзину!", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                var result = MessageBox.Show("Вы точно хотите полностью УДАЛИТЬ сообщение?", "Удаление сообщение", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (result == DialogResult.OK)
+                {
+                    var cells = dgvMessages.SelectedCells.GetEnumerator();
+                    cells.MoveNext();
+                    var uid = (UniqueId)((DataGridViewTextBoxCell)cells.Current).Value;
+                    await _openFolder.OpenAsync(FolderAccess.ReadWrite, _token);
+                    await _openFolder.AddFlagsAsync(uid, MessageFlags.Deleted, false, _token);
+                    if (_clientProfile.Client.Capabilities.HasFlag(ImapCapabilities.UidPlus))
+                    {
+                        await _openFolder.ExpungeAsync(new UniqueId[] { uid });
+                        dgvMessages.Rows.Remove(dgvMessages.CurrentRow);
+                    }
+                }
+            }
+            ViewMessageClear();
         }
 
         private async void DownloadAttachments(string directory)
@@ -314,6 +399,62 @@ namespace E_mail_client
                     part.ContentObject.DecodeTo(stream);
                 labelAttachments.Enabled = true;
                 labelAttachments.Text = "Открыть вложения";
+            }
+        }
+
+        private void LinkDefaultFont()
+        {
+            lnkAll.Font =
+                lnkArchive.Font =
+                lnkDrafts.Font =
+                lnkFlagged.Font =
+                lnkImportant.Font =
+                lnkInbox.Font =
+                lnkJunk.Font =
+                lnkSent.Font =
+                lnkTrash.Font = new Font(lnkTrash.Font, FontStyle.Regular);
+        }
+
+        private void LinkLock()
+        {
+            lnkAll.Enabled =
+                lnkArchive.Enabled =
+                lnkDrafts.Enabled =
+                lnkFlagged.Enabled =
+                lnkImportant.Enabled =
+                lnkInbox.Enabled =
+                lnkJunk.Enabled =
+                lnkSent.Enabled =
+                lnkTrash.Enabled = false;
+        }
+
+        private void LinkActive()
+        {
+            lnkAll.Enabled =
+                lnkArchive.Enabled =
+                lnkDrafts.Enabled =
+                lnkFlagged.Enabled =
+                lnkImportant.Enabled =
+                lnkInbox.Enabled =
+                lnkJunk.Enabled =
+                lnkSent.Enabled =
+                lnkTrash.Enabled = true;
+        }
+
+        private void ViewMessageClear()
+        {
+            labelDate.Text = "Дата: ";
+            labelTheme.Text = "Тема: ";
+            labelFrom.Text = "От: ";
+            labelTo.Text = "Кому: ";
+            webBrowser.DocumentText = "";
+        }
+
+        private void ClietnReconnect()
+        {
+            if (!_clientProfile.Client.IsConnected || !_clientProfile.Client.IsAuthenticated)
+            {
+                _clientProfile.Reconnect();
             }
         }
     }
