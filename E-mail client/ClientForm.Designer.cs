@@ -534,6 +534,7 @@
             this.buttonNewMessage.Text = "Написать новое сообщение";
             this.buttonNewMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonNewMessage.UseVisualStyleBackColor = true;
+            this.buttonNewMessage.Click += new System.EventHandler(this.ButtonNewMessage_Click);
             // 
             // tableLayoutPanelNameEmail
             // 

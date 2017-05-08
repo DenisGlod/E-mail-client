@@ -457,5 +457,10 @@ namespace E_mail_client
                 _clientProfile.Reconnect();
             }
         }
+
+        private void ButtonNewMessage_Click(object sender, EventArgs e)
+        {
+            new NewMessagesForm(_clientProfile).Visible = true;
+        }
     }
 }
