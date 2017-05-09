@@ -34,32 +34,37 @@
             this.send = new System.Windows.Forms.Button();
             this.panelMessages = new System.Windows.Forms.Panel();
             this.lnkAddAttachments = new System.Windows.Forms.LinkLabel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbMessage = new System.Windows.Forms.TextBox();
+            this.tbTo = new System.Windows.Forms.TextBox();
+            this.tbSubject = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panelButton.SuspendLayout();
             this.panelMessages.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelButton
             // 
+            this.panelButton.Controls.Add(this.button2);
             this.panelButton.Controls.Add(this.saveInDrafts);
             this.panelButton.Controls.Add(this.send);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButton.Location = new System.Drawing.Point(0, 333);
+            this.panelButton.Location = new System.Drawing.Point(0, 354);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(411, 47);
+            this.panelButton.Size = new System.Drawing.Size(424, 47);
             this.panelButton.TabIndex = 0;
             // 
             // saveInDrafts
             // 
-            this.saveInDrafts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveInDrafts.Image = global::E_mail_client.Properties.Resources.pencil;
             this.saveInDrafts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.saveInDrafts.Location = new System.Drawing.Point(236, 12);
+            this.saveInDrafts.Location = new System.Drawing.Point(118, 12);
             this.saveInDrafts.Name = "saveInDrafts";
             this.saveInDrafts.Size = new System.Drawing.Size(151, 23);
             this.saveInDrafts.TabIndex = 1;
@@ -82,16 +87,17 @@
             // 
             // panelMessages
             // 
+            this.panelMessages.Controls.Add(this.groupBox1);
             this.panelMessages.Controls.Add(this.lnkAddAttachments);
-            this.panelMessages.Controls.Add(this.textBox3);
-            this.panelMessages.Controls.Add(this.textBox2);
-            this.panelMessages.Controls.Add(this.textBox1);
+            this.panelMessages.Controls.Add(this.tbMessage);
+            this.panelMessages.Controls.Add(this.tbTo);
+            this.panelMessages.Controls.Add(this.tbSubject);
             this.panelMessages.Controls.Add(this.label2);
             this.panelMessages.Controls.Add(this.label1);
             this.panelMessages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMessages.Location = new System.Drawing.Point(0, 0);
             this.panelMessages.Name = "panelMessages";
-            this.panelMessages.Size = new System.Drawing.Size(411, 333);
+            this.panelMessages.Size = new System.Drawing.Size(424, 354);
             this.panelMessages.TabIndex = 1;
             // 
             // lnkAddAttachments
@@ -106,42 +112,42 @@
             this.lnkAddAttachments.LinkColor = System.Drawing.Color.Black;
             this.lnkAddAttachments.Location = new System.Drawing.Point(25, 77);
             this.lnkAddAttachments.Name = "lnkAddAttachments";
-            this.lnkAddAttachments.Size = new System.Drawing.Size(362, 25);
+            this.lnkAddAttachments.Size = new System.Drawing.Size(375, 25);
             this.lnkAddAttachments.TabIndex = 5;
             this.lnkAddAttachments.TabStop = true;
             this.lnkAddAttachments.Text = "Добавить вложения";
             this.lnkAddAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lnkAddAttachments.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkAddAttachments_LinkClicked);
             // 
-            // textBox3
+            // tbMessage
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tbMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(25, 111);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(362, 222);
-            this.textBox3.TabIndex = 4;
+            this.tbMessage.Location = new System.Drawing.Point(25, 164);
+            this.tbMessage.Multiline = true;
+            this.tbMessage.Name = "tbMessage";
+            this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbMessage.Size = new System.Drawing.Size(375, 190);
+            this.tbMessage.TabIndex = 4;
             // 
-            // textBox2
+            // tbTo
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(65, 47);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(322, 20);
-            this.textBox2.TabIndex = 3;
+            this.tbTo.Location = new System.Drawing.Point(65, 47);
+            this.tbTo.Name = "tbTo";
+            this.tbTo.Size = new System.Drawing.Size(335, 20);
+            this.tbTo.TabIndex = 3;
             // 
-            // textBox1
+            // tbSubject
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbSubject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(65, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(322, 20);
-            this.textBox1.TabIndex = 2;
+            this.tbSubject.Location = new System.Drawing.Point(65, 20);
+            this.tbSubject.Name = "tbSubject";
+            this.tbSubject.Size = new System.Drawing.Size(335, 20);
+            this.tbSubject.TabIndex = 2;
             // 
             // label2
             // 
@@ -167,20 +173,69 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.Title = "Добавить вложения";
             // 
+            // button2
+            // 
+            this.button2.Image = global::E_mail_client.Properties.Resources.delete_message;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(275, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(128, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Удалить вложения";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(79, 17);
+            this.radioButton1.TabIndex = 6;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Текстовое";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(93, 19);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(87, 17);
+            this.radioButton2.TabIndex = 7;
+            this.radioButton2.Text = "HTML / CSS";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(118, 112);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(185, 46);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Тип сообщения";
+            // 
             // NewMessagesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 380);
+            this.ClientSize = new System.Drawing.Size(424, 401);
             this.Controls.Add(this.panelMessages);
             this.Controls.Add(this.panelButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(440, 440);
             this.Name = "NewMessagesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Новое сообщение";
             this.panelButton.ResumeLayout(false);
             this.panelMessages.ResumeLayout(false);
             this.panelMessages.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -189,14 +244,18 @@
 
         private System.Windows.Forms.Panel panelButton;
         private System.Windows.Forms.Panel panelMessages;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbMessage;
+        private System.Windows.Forms.TextBox tbTo;
+        private System.Windows.Forms.TextBox tbSubject;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button saveInDrafts;
         private System.Windows.Forms.Button send;
         private System.Windows.Forms.LinkLabel lnkAddAttachments;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

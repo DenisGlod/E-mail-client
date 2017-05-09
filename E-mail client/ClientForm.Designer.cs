@@ -85,7 +85,7 @@
             this.gbMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbMenu.Location = new System.Drawing.Point(0, 40);
             this.gbMenu.Name = "gbMenu";
-            this.gbMenu.Size = new System.Drawing.Size(200, 538);
+            this.gbMenu.Size = new System.Drawing.Size(200, 463);
             this.gbMenu.TabIndex = 2;
             this.gbMenu.TabStop = false;
             this.gbMenu.Text = "Папки";
@@ -100,7 +100,7 @@
             this.treeViewFolder.ItemHeight = 18;
             this.treeViewFolder.Location = new System.Drawing.Point(3, 293);
             this.treeViewFolder.Name = "treeViewFolder";
-            this.treeViewFolder.Size = new System.Drawing.Size(194, 242);
+            this.treeViewFolder.Size = new System.Drawing.Size(194, 167);
             this.treeViewFolder.TabIndex = 9;
             this.treeViewFolder.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewFolder_BeforeSelect);
             this.treeViewFolder.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewFolder_AfterSelect);
@@ -318,9 +318,9 @@
             this.gbViewMessages.Controls.Add(this.labelDate);
             this.gbViewMessages.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbViewMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.gbViewMessages.Location = new System.Drawing.Point(762, 40);
+            this.gbViewMessages.Location = new System.Drawing.Point(629, 40);
             this.gbViewMessages.Name = "gbViewMessages";
-            this.gbViewMessages.Size = new System.Drawing.Size(485, 538);
+            this.gbViewMessages.Size = new System.Drawing.Size(276, 463);
             this.gbViewMessages.TabIndex = 4;
             this.gbViewMessages.TabStop = false;
             this.gbViewMessages.Text = "Просмотр";
@@ -333,7 +333,7 @@
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(479, 387);
+            this.webBrowser.Size = new System.Drawing.Size(270, 312);
             this.webBrowser.TabIndex = 16;
             // 
             // labelAttachments
@@ -346,7 +346,7 @@
             this.labelAttachments.Location = new System.Drawing.Point(3, 148);
             this.labelAttachments.Name = "labelAttachments";
             this.labelAttachments.Padding = new System.Windows.Forms.Padding(30, 0, 0, 5);
-            this.labelAttachments.Size = new System.Drawing.Size(479, 0);
+            this.labelAttachments.Size = new System.Drawing.Size(270, 0);
             this.labelAttachments.TabIndex = 15;
             this.labelAttachments.TabStop = true;
             this.labelAttachments.Text = "Скачать вложения";
@@ -360,7 +360,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 138);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(479, 10);
+            this.panel4.Size = new System.Drawing.Size(270, 10);
             this.panel4.TabIndex = 14;
             // 
             // panel5
@@ -369,7 +369,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 137);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(479, 1);
+            this.panel5.Size = new System.Drawing.Size(270, 1);
             this.panel5.TabIndex = 12;
             // 
             // panel6
@@ -378,7 +378,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 127);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(479, 10);
+            this.panel6.Size = new System.Drawing.Size(270, 10);
             this.panel6.TabIndex = 13;
             // 
             // labelTo
@@ -388,7 +388,7 @@
             this.labelTo.Location = new System.Drawing.Point(3, 100);
             this.labelTo.Name = "labelTo";
             this.labelTo.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTo.Size = new System.Drawing.Size(479, 27);
+            this.labelTo.Size = new System.Drawing.Size(270, 27);
             this.labelTo.TabIndex = 3;
             this.labelTo.Text = "Кому: ";
             this.labelTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -400,7 +400,7 @@
             this.labelFrom.Location = new System.Drawing.Point(3, 73);
             this.labelFrom.Name = "labelFrom";
             this.labelFrom.Padding = new System.Windows.Forms.Padding(5);
-            this.labelFrom.Size = new System.Drawing.Size(479, 27);
+            this.labelFrom.Size = new System.Drawing.Size(270, 27);
             this.labelFrom.TabIndex = 2;
             this.labelFrom.Text = "От: ";
             this.labelFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -412,7 +412,7 @@
             this.labelTheme.Location = new System.Drawing.Point(3, 46);
             this.labelTheme.Name = "labelTheme";
             this.labelTheme.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTheme.Size = new System.Drawing.Size(479, 27);
+            this.labelTheme.Size = new System.Drawing.Size(270, 27);
             this.labelTheme.TabIndex = 1;
             this.labelTheme.Text = "Тема: ";
             this.labelTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -424,7 +424,7 @@
             this.labelDate.Location = new System.Drawing.Point(3, 19);
             this.labelDate.Name = "labelDate";
             this.labelDate.Padding = new System.Windows.Forms.Padding(5);
-            this.labelDate.Size = new System.Drawing.Size(479, 27);
+            this.labelDate.Size = new System.Drawing.Size(270, 27);
             this.labelDate.TabIndex = 0;
             this.labelDate.Text = "Дата: ";
             this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -433,16 +433,16 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 40);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 538);
+            this.splitter1.Size = new System.Drawing.Size(3, 463);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(759, 40);
+            this.splitter2.Location = new System.Drawing.Point(626, 40);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 538);
+            this.splitter2.Size = new System.Drawing.Size(3, 463);
             this.splitter2.TabIndex = 6;
             this.splitter2.TabStop = false;
             // 
@@ -455,7 +455,7 @@
             this.gbMessagesAndButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbMessagesAndButton.Location = new System.Drawing.Point(203, 40);
             this.gbMessagesAndButton.Name = "gbMessagesAndButton";
-            this.gbMessagesAndButton.Size = new System.Drawing.Size(556, 538);
+            this.gbMessagesAndButton.Size = new System.Drawing.Size(423, 463);
             this.gbMessagesAndButton.TabIndex = 7;
             this.gbMessagesAndButton.TabStop = false;
             this.gbMessagesAndButton.Text = "Письма";
@@ -469,7 +469,7 @@
             this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
             this.picDownload.Location = new System.Drawing.Point(3, 19);
             this.picDownload.Name = "picDownload";
-            this.picDownload.Size = new System.Drawing.Size(550, 474);
+            this.picDownload.Size = new System.Drawing.Size(417, 399);
             this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picDownload.TabIndex = 4;
             this.picDownload.TabStop = false;
@@ -492,9 +492,11 @@
             this.dgvMessages.RowHeadersVisible = false;
             this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMessages.Size = new System.Drawing.Size(550, 474);
+            this.dgvMessages.Size = new System.Drawing.Size(417, 399);
             this.dgvMessages.TabIndex = 3;
             this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellClick);
+            this.dgvMessages.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMessages_RowEnter);
+            this.dgvMessages.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMessages_RowLeave);
             // 
             // panelButton
             // 
@@ -502,18 +504,18 @@
             this.panelButton.Controls.Add(this.buttonNewMessage);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelButton.Location = new System.Drawing.Point(3, 493);
+            this.panelButton.Location = new System.Drawing.Point(3, 418);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(550, 42);
+            this.panelButton.Size = new System.Drawing.Size(417, 42);
             this.panelButton.TabIndex = 2;
             // 
             // buttonDeleteMessage
             // 
-            this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.buttonDeleteMessage.AutoSize = true;
+            this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDeleteMessage.Enabled = false;
             this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
             this.buttonDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDeleteMessage.Location = new System.Drawing.Point(316, 7);
+            this.buttonDeleteMessage.Location = new System.Drawing.Point(264, 7);
             this.buttonDeleteMessage.Name = "buttonDeleteMessage";
             this.buttonDeleteMessage.Size = new System.Drawing.Size(135, 29);
             this.buttonDeleteMessage.TabIndex = 1;
@@ -524,10 +526,9 @@
             // 
             // buttonNewMessage
             // 
-            this.buttonNewMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonNewMessage.Image = global::E_mail_client.Properties.Resources.new_message;
             this.buttonNewMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewMessage.Location = new System.Drawing.Point(83, 7);
+            this.buttonNewMessage.Location = new System.Drawing.Point(16, 7);
             this.buttonNewMessage.Name = "buttonNewMessage";
             this.buttonNewMessage.Size = new System.Drawing.Size(179, 29);
             this.buttonNewMessage.TabIndex = 0;
@@ -549,7 +550,7 @@
             this.tableLayoutPanelNameEmail.RowCount = 1;
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(1247, 40);
+            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(905, 40);
             this.tableLayoutPanelNameEmail.TabIndex = 0;
             // 
             // labelNameEmail
@@ -562,7 +563,7 @@
             this.labelNameEmail.Location = new System.Drawing.Point(3, 3);
             this.labelNameEmail.Margin = new System.Windows.Forms.Padding(3);
             this.labelNameEmail.Name = "labelNameEmail";
-            this.labelNameEmail.Size = new System.Drawing.Size(1241, 34);
+            this.labelNameEmail.Size = new System.Drawing.Size(899, 34);
             this.labelNameEmail.TabIndex = 0;
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -571,7 +572,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1247, 578);
+            this.ClientSize = new System.Drawing.Size(905, 503);
             this.Controls.Add(this.gbMessagesAndButton);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -579,6 +580,7 @@
             this.Controls.Add(this.gbMenu);
             this.Controls.Add(this.tableLayoutPanelNameEmail);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(750, 400);
             this.Name = "ClientForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E-mail Client";
@@ -590,7 +592,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMessages)).EndInit();
             this.panelButton.ResumeLayout(false);
-            this.panelButton.PerformLayout();
             this.tableLayoutPanelNameEmail.ResumeLayout(false);
             this.tableLayoutPanelNameEmail.PerformLayout();
             this.ResumeLayout(false);

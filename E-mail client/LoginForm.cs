@@ -24,10 +24,12 @@ namespace E_mail_client
         {
             InitializeComponent();
             comboBoxHost.SelectedIndex = 0;
+            buttonLogin.Enabled = true;
         }
 
         private void Login_Click(object sender, EventArgs e)
         {
+            buttonLogin.Enabled = false;
             int indexHost = comboBoxHost.SelectedIndex;
             string email = textBoxEmail.Text;
             string password = textBoxPassword.Text;

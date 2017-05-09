@@ -240,8 +240,8 @@ namespace E_mail_client
         {
             ClietnReconnect();
             treeViewFolder.Enabled = false;
-            dgvMessages.Enabled = false;
-            panelButton.Enabled = false;
+            // dgvMessages.Enabled = false;
+            // panelButton.Enabled = false;
             LinkLock();
             labelAttachments.Visible = false;
             labelAttachments.Text = "Скачать вложения";
@@ -289,8 +289,8 @@ namespace E_mail_client
                 }
             }
             LinkActive();
-            panelButton.Enabled = true;
-            dgvMessages.Enabled = true;
+            // panelButton.Enabled = true;
+            // dgvMessages.Enabled = true;
             treeViewFolder.Enabled = true;
         }
 
@@ -461,6 +461,16 @@ namespace E_mail_client
         private void ButtonNewMessage_Click(object sender, EventArgs e)
         {
             new NewMessagesForm(_clientProfile).Visible = true;
+        }
+
+        private void dgvMessages_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            buttonDeleteMessage.Enabled = true;
+        }
+
+        private void dgvMessages_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            buttonDeleteMessage.Enabled = false;
         }
     }
 }
