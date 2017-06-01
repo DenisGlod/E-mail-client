@@ -240,8 +240,6 @@ namespace E_mail_client
         {
             ClietnReconnect();
             treeViewFolder.Enabled = false;
-            // dgvMessages.Enabled = false;
-            // panelButton.Enabled = false;
             LinkLock();
             labelAttachments.Visible = false;
             labelAttachments.Text = "Скачать вложения";
@@ -289,8 +287,6 @@ namespace E_mail_client
                 }
             }
             LinkActive();
-            // panelButton.Enabled = true;
-            // dgvMessages.Enabled = true;
             treeViewFolder.Enabled = true;
         }
 
@@ -350,10 +346,6 @@ namespace E_mail_client
                         dgvMessages.Rows.Remove(dgvMessages.CurrentRow);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Ошибка! Не выбрано сообщение для перемещения в корзину!", "Ошибка удаления", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
             else
             {
@@ -378,23 +370,13 @@ namespace E_mail_client
         private async void DownloadAttachments(string directory)
         {
             labelAttachments.Enabled = false;
-
             Directory.CreateDirectory(directory);
             foreach (var attachment in _attachments.Attachments)
             {
-                // download the attachment just like we did with the body
                 var entity = await _openFolder.GetBodyPartAsync(_attachments.UniqueId, attachment, _token, _tProgress);
-
-                // attachments can be either message/rfc822 parts or regular MIME parts
-
                 var part = (MimePart)entity;
-
-                // note: it's possible for this to be null, but most will specify a filename
                 var fileName = part.FileName;
-
                 var path = Path.Combine(directory, fileName);
-
-                // decode and save the content to a file
                 using (var stream = File.Create(path))
                     part.ContentObject.DecodeTo(stream);
                 labelAttachments.Enabled = true;
@@ -465,12 +447,51 @@ namespace E_mail_client
 
         private void dgvMessages_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            buttonDeleteMessage.Enabled = true;
+            btnDeleteMessage.Enabled = true;
+            btnMoveMessage.Enabled = true;
         }
 
         private void dgvMessages_RowLeave(object sender, DataGridViewCellEventArgs e)
         {
-            buttonDeleteMessage.Enabled = false;
+            btnDeleteMessage.Enabled = false;
+            btnMoveMessage.Enabled = false;
+        }
+
+        private async void BtnMoveMessage_Click(object sender, EventArgs e)
+        {
+            if (dgvMessages.SelectedRows.Count > 0)
+            {
+                List<string> list = new List<string>();
+                var nameSelectedNode = treeViewFolder.SelectedNode.Text.Trim();
+                _folders.ToList().ForEach(folder =>
+                {
+                    if (!folder.Name.Equals(nameSelectedNode))
+                    {
+                        list.Add(folder.Name);
+                    }
+                });
+
+                MoveMessage mm = new MoveMessage(list);
+                DialogResult result = mm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    var folderName = mm.Result;
+                    var cells = dgvMessages.SelectedCells.GetEnumerator();
+                    cells.MoveNext();
+                    var uid = (UniqueId)((DataGridViewTextBoxCell)cells.Current).Value;
+                    await _openFolder.OpenAsync(FolderAccess.ReadWrite, _token);
+                    IMailFolder folderForMove = null;
+                    _folders.ToList().ForEach(folder =>
+                    {
+                        if (folder.Name.Equals(folderName))
+                        {
+                            folderForMove = folder;
+                        }
+                    });
+                    await _openFolder.MoveToAsync(uid, folderForMove, _token);
+                    dgvMessages.Rows.Remove(dgvMessages.CurrentRow);
+                }
+            }
         }
     }
 }

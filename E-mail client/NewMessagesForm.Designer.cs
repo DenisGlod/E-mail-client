@@ -30,9 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMessagesForm));
             this.panelButton = new System.Windows.Forms.Panel();
-            this.saveInDrafts = new System.Windows.Forms.Button();
+            this.deleteAttachments = new System.Windows.Forms.Button();
             this.send = new System.Windows.Forms.Button();
             this.panelMessages = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbHtml = new System.Windows.Forms.RadioButton();
+            this.rbText = new System.Windows.Forms.RadioButton();
             this.lnkAddAttachments = new System.Windows.Forms.LinkLabel();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.tbTo = new System.Windows.Forms.TextBox();
@@ -40,10 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panelButton.SuspendLayout();
             this.panelMessages.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -51,8 +50,7 @@
             // 
             // panelButton
             // 
-            this.panelButton.Controls.Add(this.button2);
-            this.panelButton.Controls.Add(this.saveInDrafts);
+            this.panelButton.Controls.Add(this.deleteAttachments);
             this.panelButton.Controls.Add(this.send);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelButton.Location = new System.Drawing.Point(0, 354);
@@ -60,17 +58,19 @@
             this.panelButton.Size = new System.Drawing.Size(424, 47);
             this.panelButton.TabIndex = 0;
             // 
-            // saveInDrafts
+            // deleteAttachments
             // 
-            this.saveInDrafts.Image = global::E_mail_client.Properties.Resources.pencil;
-            this.saveInDrafts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.saveInDrafts.Location = new System.Drawing.Point(118, 12);
-            this.saveInDrafts.Name = "saveInDrafts";
-            this.saveInDrafts.Size = new System.Drawing.Size(151, 23);
-            this.saveInDrafts.TabIndex = 1;
-            this.saveInDrafts.Text = "Сохранить в черновики";
-            this.saveInDrafts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.saveInDrafts.UseVisualStyleBackColor = true;
+            this.deleteAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteAttachments.Image = global::E_mail_client.Properties.Resources.delete_message;
+            this.deleteAttachments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.deleteAttachments.Location = new System.Drawing.Point(275, 12);
+            this.deleteAttachments.Name = "deleteAttachments";
+            this.deleteAttachments.Size = new System.Drawing.Size(128, 23);
+            this.deleteAttachments.TabIndex = 7;
+            this.deleteAttachments.Text = "Удалить вложения";
+            this.deleteAttachments.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.deleteAttachments.UseVisualStyleBackColor = true;
+            this.deleteAttachments.Click += new System.EventHandler(this.DeleteAttachments_Click);
             // 
             // send
             // 
@@ -78,7 +78,7 @@
             this.send.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.send.Location = new System.Drawing.Point(25, 12);
             this.send.Name = "send";
-            this.send.Size = new System.Drawing.Size(86, 23);
+            this.send.Size = new System.Drawing.Size(88, 23);
             this.send.TabIndex = 0;
             this.send.Text = "Отправить";
             this.send.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -99,6 +99,40 @@
             this.panelMessages.Name = "panelMessages";
             this.panelMessages.Size = new System.Drawing.Size(424, 354);
             this.panelMessages.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox1.Controls.Add(this.rbHtml);
+            this.groupBox1.Controls.Add(this.rbText);
+            this.groupBox1.Location = new System.Drawing.Point(118, 112);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(185, 46);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Тип сообщения";
+            // 
+            // rbHtml
+            // 
+            this.rbHtml.AutoSize = true;
+            this.rbHtml.Location = new System.Drawing.Point(93, 19);
+            this.rbHtml.Name = "rbHtml";
+            this.rbHtml.Size = new System.Drawing.Size(87, 17);
+            this.rbHtml.TabIndex = 7;
+            this.rbHtml.Text = "HTML / CSS";
+            this.rbHtml.UseVisualStyleBackColor = true;
+            // 
+            // rbText
+            // 
+            this.rbText.AutoSize = true;
+            this.rbText.Checked = true;
+            this.rbText.Location = new System.Drawing.Point(6, 19);
+            this.rbText.Name = "rbText";
+            this.rbText.Size = new System.Drawing.Size(79, 17);
+            this.rbText.TabIndex = 6;
+            this.rbText.TabStop = true;
+            this.rbText.Text = "Текстовое";
+            this.rbText.UseVisualStyleBackColor = true;
             // 
             // lnkAddAttachments
             // 
@@ -173,52 +207,6 @@
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.Title = "Добавить вложения";
             // 
-            // button2
-            // 
-            this.button2.Image = global::E_mail_client.Properties.Resources.delete_message;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(275, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Удалить вложения";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(79, 17);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Текстовое";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(93, 19);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(87, 17);
-            this.radioButton2.TabIndex = 7;
-            this.radioButton2.Text = "HTML / CSS";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(118, 112);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(185, 46);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Тип сообщения";
-            // 
             // NewMessagesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,12 +238,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Button saveInDrafts;
         private System.Windows.Forms.Button send;
         private System.Windows.Forms.LinkLabel lnkAddAttachments;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button deleteAttachments;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbHtml;
+        private System.Windows.Forms.RadioButton rbText;
     }
 }

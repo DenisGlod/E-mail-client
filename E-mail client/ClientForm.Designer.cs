@@ -60,8 +60,9 @@
             this.picDownload = new System.Windows.Forms.PictureBox();
             this.dgvMessages = new System.Windows.Forms.DataGridView();
             this.panelButton = new System.Windows.Forms.Panel();
-            this.buttonDeleteMessage = new System.Windows.Forms.Button();
-            this.buttonNewMessage = new System.Windows.Forms.Button();
+            this.btnMoveMessage = new System.Windows.Forms.Button();
+            this.btnDeleteMessage = new System.Windows.Forms.Button();
+            this.btnNewMessage = new System.Windows.Forms.Button();
             this.tableLayoutPanelNameEmail = new System.Windows.Forms.TableLayoutPanel();
             this.labelNameEmail = new System.Windows.Forms.Label();
             this.gbMenu.SuspendLayout();
@@ -318,9 +319,9 @@
             this.gbViewMessages.Controls.Add(this.labelDate);
             this.gbViewMessages.Dock = System.Windows.Forms.DockStyle.Right;
             this.gbViewMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.gbViewMessages.Location = new System.Drawing.Point(629, 40);
+            this.gbViewMessages.Location = new System.Drawing.Point(716, 40);
             this.gbViewMessages.Name = "gbViewMessages";
-            this.gbViewMessages.Size = new System.Drawing.Size(276, 463);
+            this.gbViewMessages.Size = new System.Drawing.Size(372, 463);
             this.gbViewMessages.TabIndex = 4;
             this.gbViewMessages.TabStop = false;
             this.gbViewMessages.Text = "Просмотр";
@@ -333,7 +334,7 @@
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Size = new System.Drawing.Size(270, 312);
+            this.webBrowser.Size = new System.Drawing.Size(366, 312);
             this.webBrowser.TabIndex = 16;
             // 
             // labelAttachments
@@ -346,7 +347,7 @@
             this.labelAttachments.Location = new System.Drawing.Point(3, 148);
             this.labelAttachments.Name = "labelAttachments";
             this.labelAttachments.Padding = new System.Windows.Forms.Padding(30, 0, 0, 5);
-            this.labelAttachments.Size = new System.Drawing.Size(270, 0);
+            this.labelAttachments.Size = new System.Drawing.Size(366, 0);
             this.labelAttachments.TabIndex = 15;
             this.labelAttachments.TabStop = true;
             this.labelAttachments.Text = "Скачать вложения";
@@ -360,7 +361,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 138);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(270, 10);
+            this.panel4.Size = new System.Drawing.Size(366, 10);
             this.panel4.TabIndex = 14;
             // 
             // panel5
@@ -369,7 +370,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 137);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(270, 1);
+            this.panel5.Size = new System.Drawing.Size(366, 1);
             this.panel5.TabIndex = 12;
             // 
             // panel6
@@ -378,7 +379,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 127);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(270, 10);
+            this.panel6.Size = new System.Drawing.Size(366, 10);
             this.panel6.TabIndex = 13;
             // 
             // labelTo
@@ -388,7 +389,7 @@
             this.labelTo.Location = new System.Drawing.Point(3, 100);
             this.labelTo.Name = "labelTo";
             this.labelTo.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTo.Size = new System.Drawing.Size(270, 27);
+            this.labelTo.Size = new System.Drawing.Size(366, 27);
             this.labelTo.TabIndex = 3;
             this.labelTo.Text = "Кому: ";
             this.labelTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -400,7 +401,7 @@
             this.labelFrom.Location = new System.Drawing.Point(3, 73);
             this.labelFrom.Name = "labelFrom";
             this.labelFrom.Padding = new System.Windows.Forms.Padding(5);
-            this.labelFrom.Size = new System.Drawing.Size(270, 27);
+            this.labelFrom.Size = new System.Drawing.Size(366, 27);
             this.labelFrom.TabIndex = 2;
             this.labelFrom.Text = "От: ";
             this.labelFrom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -412,7 +413,7 @@
             this.labelTheme.Location = new System.Drawing.Point(3, 46);
             this.labelTheme.Name = "labelTheme";
             this.labelTheme.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTheme.Size = new System.Drawing.Size(270, 27);
+            this.labelTheme.Size = new System.Drawing.Size(366, 27);
             this.labelTheme.TabIndex = 1;
             this.labelTheme.Text = "Тема: ";
             this.labelTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -424,7 +425,7 @@
             this.labelDate.Location = new System.Drawing.Point(3, 19);
             this.labelDate.Name = "labelDate";
             this.labelDate.Padding = new System.Windows.Forms.Padding(5);
-            this.labelDate.Size = new System.Drawing.Size(270, 27);
+            this.labelDate.Size = new System.Drawing.Size(366, 27);
             this.labelDate.TabIndex = 0;
             this.labelDate.Text = "Дата: ";
             this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -440,7 +441,7 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(626, 40);
+            this.splitter2.Location = new System.Drawing.Point(713, 40);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 463);
             this.splitter2.TabIndex = 6;
@@ -455,7 +456,7 @@
             this.gbMessagesAndButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbMessagesAndButton.Location = new System.Drawing.Point(203, 40);
             this.gbMessagesAndButton.Name = "gbMessagesAndButton";
-            this.gbMessagesAndButton.Size = new System.Drawing.Size(423, 463);
+            this.gbMessagesAndButton.Size = new System.Drawing.Size(510, 463);
             this.gbMessagesAndButton.TabIndex = 7;
             this.gbMessagesAndButton.TabStop = false;
             this.gbMessagesAndButton.Text = "Письма";
@@ -469,7 +470,7 @@
             this.picDownload.Image = global::E_mail_client.Properties.Resources.download;
             this.picDownload.Location = new System.Drawing.Point(3, 19);
             this.picDownload.Name = "picDownload";
-            this.picDownload.Size = new System.Drawing.Size(417, 399);
+            this.picDownload.Size = new System.Drawing.Size(504, 399);
             this.picDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picDownload.TabIndex = 4;
             this.picDownload.TabStop = false;
@@ -492,7 +493,7 @@
             this.dgvMessages.RowHeadersVisible = false;
             this.dgvMessages.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dgvMessages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMessages.Size = new System.Drawing.Size(417, 399);
+            this.dgvMessages.Size = new System.Drawing.Size(504, 399);
             this.dgvMessages.TabIndex = 3;
             this.dgvMessages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMessages_CellClick);
             this.dgvMessages.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMessages_RowEnter);
@@ -500,42 +501,59 @@
             // 
             // panelButton
             // 
-            this.panelButton.Controls.Add(this.buttonDeleteMessage);
-            this.panelButton.Controls.Add(this.buttonNewMessage);
+            this.panelButton.Controls.Add(this.btnMoveMessage);
+            this.panelButton.Controls.Add(this.btnDeleteMessage);
+            this.panelButton.Controls.Add(this.btnNewMessage);
             this.panelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panelButton.Location = new System.Drawing.Point(3, 418);
             this.panelButton.Name = "panelButton";
-            this.panelButton.Size = new System.Drawing.Size(417, 42);
+            this.panelButton.Size = new System.Drawing.Size(504, 42);
             this.panelButton.TabIndex = 2;
             // 
-            // buttonDeleteMessage
+            // btnMoveMessage
             // 
-            this.buttonDeleteMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDeleteMessage.Enabled = false;
-            this.buttonDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
-            this.buttonDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDeleteMessage.Location = new System.Drawing.Point(264, 7);
-            this.buttonDeleteMessage.Name = "buttonDeleteMessage";
-            this.buttonDeleteMessage.Size = new System.Drawing.Size(135, 29);
-            this.buttonDeleteMessage.TabIndex = 1;
-            this.buttonDeleteMessage.Text = "Удалить сообщение";
-            this.buttonDeleteMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonDeleteMessage.UseVisualStyleBackColor = true;
-            this.buttonDeleteMessage.Click += new System.EventHandler(this.ButtonDeleteMessage_Click);
+            this.btnMoveMessage.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnMoveMessage.Enabled = false;
+            this.btnMoveMessage.Image = global::E_mail_client.Properties.Resources.move_message;
+            this.btnMoveMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMoveMessage.Location = new System.Drawing.Point(332, 6);
+            this.btnMoveMessage.Name = "btnMoveMessage";
+            this.btnMoveMessage.Size = new System.Drawing.Size(159, 30);
+            this.btnMoveMessage.TabIndex = 2;
+            this.btnMoveMessage.Text = "Переместить сообщение";
+            this.btnMoveMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMoveMessage.UseVisualStyleBackColor = true;
+            this.btnMoveMessage.Click += new System.EventHandler(this.BtnMoveMessage_Click);
             // 
-            // buttonNewMessage
+            // btnDeleteMessage
             // 
-            this.buttonNewMessage.Image = global::E_mail_client.Properties.Resources.new_message;
-            this.buttonNewMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewMessage.Location = new System.Drawing.Point(16, 7);
-            this.buttonNewMessage.Name = "buttonNewMessage";
-            this.buttonNewMessage.Size = new System.Drawing.Size(179, 29);
-            this.buttonNewMessage.TabIndex = 0;
-            this.buttonNewMessage.Text = "Написать новое сообщение";
-            this.buttonNewMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonNewMessage.UseVisualStyleBackColor = true;
-            this.buttonNewMessage.Click += new System.EventHandler(this.ButtonNewMessage_Click);
+            this.btnDeleteMessage.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnDeleteMessage.Enabled = false;
+            this.btnDeleteMessage.Image = global::E_mail_client.Properties.Resources.delete_message;
+            this.btnDeleteMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteMessage.Location = new System.Drawing.Point(191, 6);
+            this.btnDeleteMessage.Name = "btnDeleteMessage";
+            this.btnDeleteMessage.Size = new System.Drawing.Size(135, 30);
+            this.btnDeleteMessage.TabIndex = 1;
+            this.btnDeleteMessage.Text = "Удалить сообщение";
+            this.btnDeleteMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeleteMessage.UseVisualStyleBackColor = true;
+            this.btnDeleteMessage.Click += new System.EventHandler(this.ButtonDeleteMessage_Click);
+            // 
+            // btnNewMessage
+            // 
+            this.btnNewMessage.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnNewMessage.Image = global::E_mail_client.Properties.Resources.new_message;
+            this.btnNewMessage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNewMessage.Location = new System.Drawing.Point(6, 6);
+            this.btnNewMessage.Name = "btnNewMessage";
+            this.btnNewMessage.Size = new System.Drawing.Size(179, 30);
+            this.btnNewMessage.TabIndex = 0;
+            this.btnNewMessage.Text = "Написать новое сообщение";
+            this.btnNewMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNewMessage.UseVisualStyleBackColor = true;
+            this.btnNewMessage.Click += new System.EventHandler(this.ButtonNewMessage_Click);
             // 
             // tableLayoutPanelNameEmail
             // 
@@ -550,7 +568,7 @@
             this.tableLayoutPanelNameEmail.RowCount = 1;
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelNameEmail.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(905, 40);
+            this.tableLayoutPanelNameEmail.Size = new System.Drawing.Size(1088, 40);
             this.tableLayoutPanelNameEmail.TabIndex = 0;
             // 
             // labelNameEmail
@@ -563,7 +581,7 @@
             this.labelNameEmail.Location = new System.Drawing.Point(3, 3);
             this.labelNameEmail.Margin = new System.Windows.Forms.Padding(3);
             this.labelNameEmail.Name = "labelNameEmail";
-            this.labelNameEmail.Size = new System.Drawing.Size(899, 34);
+            this.labelNameEmail.Size = new System.Drawing.Size(1082, 34);
             this.labelNameEmail.TabIndex = 0;
             this.labelNameEmail.Text = "email address";
             this.labelNameEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -572,7 +590,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 503);
+            this.ClientSize = new System.Drawing.Size(1088, 503);
             this.Controls.Add(this.gbMessagesAndButton);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
@@ -621,8 +639,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelButton;
-        private System.Windows.Forms.Button buttonDeleteMessage;
-        private System.Windows.Forms.Button buttonNewMessage;
+        private System.Windows.Forms.Button btnDeleteMessage;
+        private System.Windows.Forms.Button btnNewMessage;
         private System.Windows.Forms.DataGridView dgvMessages;
         private System.Windows.Forms.LinkLabel labelAttachments;
         private System.Windows.Forms.Panel panel4;
@@ -634,5 +652,6 @@
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.PictureBox picDownload;
+        private System.Windows.Forms.Button btnMoveMessage;
     }
 }

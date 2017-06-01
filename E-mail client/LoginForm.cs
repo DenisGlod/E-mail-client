@@ -16,7 +16,15 @@ namespace E_mail_client
         private const string OutlookHost = "imap-mail.outlook.com";
         private const string YandexHost = "imap.yandex.ru";
         private const string MailRuHost = "imap.mail.ru";
+
+        private const string SmtpGmailHost = "smtp.gmail.com";
+        private const string SmtpOutlookHost = "smtp-mail.outlook.com";
+        private const string SmtpYandexHost = "smtp.yandex.ru";
+        private const string SmtpMailRuHost = "smtp.mail.ru";
+
         private const int PortImap = 993;
+        private const int PortSmtp = 465;
+        private const int PortSmtpOther = 587;
 
         private ClientProfile _clientProfile;
 
@@ -46,28 +54,28 @@ namespace E_mail_client
                 switch (indexHost)
                 {
                     case 0:
-                        Conect(GmailHost, email, password);
+                        Conect(GmailHost, SmtpGmailHost, email, password, PortSmtp);
                         break;
                     case 1:
-                        Conect(OutlookHost, email, password);
+                        Conect(OutlookHost, SmtpOutlookHost, email, password, PortSmtpOther);
                         break;
                     case 2:
-                        Conect(YandexHost, email, password);
+                        Conect(YandexHost, SmtpYandexHost, email, password, PortSmtp);
                         break;
                     case 3:
-                        Conect(MailRuHost, email, password);
+                        Conect(MailRuHost, SmtpMailRuHost, email, password, PortSmtp);
                         break;
                 }
             }
         }
-        private async void Conect(string host, string email, string password)
+        private async void Conect(string host, string smtpHost, string email, string password, int smtpPort)
         {
             try
             {
                 ImapClient imapClient = new ImapClient();
                 await imapClient.ConnectAsync(host, PortImap, SecureSocketOptions.SslOnConnect);
                 await imapClient.AuthenticateAsync(email, password);
-                _clientProfile = new ClientProfile(imapClient, email, password, host, PortImap);
+                _clientProfile = new ClientProfile(imapClient, email, password, host, smtpHost, PortImap, smtpPort);
                 Message(SuccessConnect, false);
             }
             catch (Exception e)

@@ -93,6 +93,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoveMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoveMessage.Designer.cs">
+      <DependentUpon>MoveMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewMessagesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoveMessage.resx">
+      <DependentUpon>MoveMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewMessagesForm.resx">
       <DependentUpon>NewMessagesForm.cs</DependentUpon>
@@ -193,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="email.ico" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\ok.png" />
+    <None Include="Resources\move message.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

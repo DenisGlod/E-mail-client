@@ -1,4 +1,6 @@
-﻿using MimeKit;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 using System;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,7 @@ namespace E_mail_client
     {
         private ClientProfile _clientProfile;
         private string[] _attachments;
+
         public NewMessagesForm(ClientProfile clientProfile)
         {
             InitializeComponent();
@@ -23,17 +26,45 @@ namespace E_mail_client
             string to = tbTo.Text.Trim();
             string subject = tbSubject.Text.Trim();
             string messageText = tbMessage.Text;
+            MimeMessage message = new MimeMessage();
             if (!Regex.IsMatch(to, @"^.+\@\w+\.\w+$") || subject.Equals(""))
             {
                 MessageBox.Show("Некорректный адресс получателя\r\nили тема сообщения пуста!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MimeMessage message = new MimeMessage();
                 message.From.Add(new MailboxAddress(from));
+                message.To.Add(new MailboxAddress(to));
+                message.Subject = subject;
 
-                //message.To.Add(new MailboxAddress();
-            }
+                var builder = new BodyBuilder();
+
+                if (rbText.Checked)
+                {
+                    builder.TextBody = messageText;
+                }
+                else if (rbHtml.Checked)
+                {
+                    builder.HtmlBody = messageText;
+                }
+                if (_attachments != null)
+                {
+                    foreach (string str in _attachments)
+                    {
+                        builder.Attachments.Add(str);
+                    }
+                }
+                message.Body = builder.ToMessageBody();
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(_clientProfile.SmtpHost, _clientProfile.SmtpPort, SecureSocketOptions.SslOnConnect);
+                    client.Authenticate(_clientProfile.Email, _clientProfile.Password);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                AllClear();
+                MessageBox.Show("Сообщение успешно отправлено!", "Отправка сообщения", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } 
         }
 
         private void LnkAddAttachments_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -61,6 +92,21 @@ namespace E_mail_client
                     lnkAddAttachments.Text = sb.ToString();
                 }
             }
+        }
+
+        private void DeleteAttachments_Click(object sender, EventArgs e)
+        {
+            lnkAddAttachments.Text = "Добавить вложения";
+            _attachments = null;
+        }
+
+        private void AllClear()
+        {
+            tbSubject.Clear();
+            tbTo.Clear();
+            tbMessage.Clear();
+            _attachments = null;
+            lnkAddAttachments.Text = "Добавить вложения";
         }
     }
 }
