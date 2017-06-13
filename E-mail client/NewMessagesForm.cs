@@ -64,7 +64,7 @@ namespace E_mail_client
                 }
                 AllClear();
                 MessageBox.Show("Сообщение успешно отправлено!", "Отправка сообщения", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } 
+            }
         }
 
         private void LnkAddAttachments_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

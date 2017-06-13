@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="E_mail_client.Program">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.LoginForm">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>jAQAEAQAISBABBAAAgSFAAQSCiEBAHACAQEAIQBiAmA=</HashCode>
+      <FileName>LoginForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.ClientForm">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>MAigEEAIECCIGDFUIACBS4KiECBQBBACARCSIQwQI4E=</HashCode>
+      <FileName>ClientForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.ClientProfile">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAAAAACIAAAAAAAAAAAAACAAACAACAAAAAAAAAAQ=</HashCode>
+      <FileName>ClientProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.MoveMessage">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAABEQAACAAAQCAAAABAAAAAAAAEAAAAA=</HashCode>
+      <FileName>MoveMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.NewMessagesForm">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIACCACQhgAABCgQAACAAAQABACACCAAAAQgCQ=</HashCode>
+      <FileName>NewMessagesForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_mail_client.TransferProgress">
+    <Position X="11" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAJAAEAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>TransferProgress.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
