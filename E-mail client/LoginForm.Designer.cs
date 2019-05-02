@@ -66,7 +66,6 @@
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(205, 20);
             this.textBoxEmail.TabIndex = 2;
-            this.textBoxEmail.Text = "glod.denis.konstantinovich@yandex.ru";
             // 
             // textBoxPassword
             // 
@@ -74,7 +73,6 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(205, 20);
             this.textBoxPassword.TabIndex = 3;
-            this.textBoxPassword.Text = "T4Puk8#9vrlF&%8)";
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // labelEmail
